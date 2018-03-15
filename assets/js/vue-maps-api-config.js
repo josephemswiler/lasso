@@ -22,11 +22,10 @@ let app = new Vue({
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
-        
-                    this.infoWindow.setPosition(pos);
-                    this.infoWindow.setContent('Location found.');
-                    this.infoWindow.open(this.map);
-                    this.map.setCenter(pos);
+                    app._data.infoWindow.setPosition(pos);
+                    app._data.infoWindow.setContent('Location found.');
+                    app._data.infoWindow.open(app._data.map);
+                    app._data.map.setCenter(pos);
                 }, function () {
                     handleLocationError(true, this.infoWindow, this.map.getCenter());
                 });
@@ -45,46 +44,7 @@ let app = new Vue({
     }
 })
 
-
-
-
-
-
-// function initMap() {
-//     map = new google.maps.Map(document.getElementById('gmap'), {
-//         center: {
-//             lat: -34.397,
-//             lng: 150.644
-//         },
-//         zoom: 6
-//     });
-//     infoWindow = new google.maps.InfoWindow;
-
-//     // Try HTML5 geolocation.
-//     if (navigator.geolocation) {
-//         navigator.geolocation.getCurrentPosition(function (position) {
-//             let pos = {
-//                 lat: position.coords.latitude,
-//                 lng: position.coords.longitude
-//             };
-
-//             infoWindow.setPosition(pos);
-//             infoWindow.setContent('Location found.');
-//             infoWindow.open(map);
-//             map.setCenter(pos);
-//         }, function () {
-//             handleLocationError(true, infoWindow, map.getCenter());
-//         });
-//     } else {
-//         // Browser doesn't support Geolocation
-//         handleLocationError(false, infoWindow, map.getCenter());
-//     }
-// }
-
-// function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-//     infoWindow.setPosition(pos);
-//     infoWindow.setContent(browserHasGeolocation ?
-//         'Error: The Geolocation service failed.' :
-//         'Error: Your browser doesn\'t support geolocation.');
-//     infoWindow.open(map);
-// }
+function gmapsCallback(){
+    app.initMap()
+}
+console.log(app)
