@@ -32,3 +32,8 @@ height: auto;
 	height: 400px;
 	background-color: grey;
 }
+
+#place-details{
+	width: 30%;
+	height: 100%;
+}
