@@ -108,10 +108,10 @@ Vue.component('todo-item', {
         { id: 0, text: "" }, // name
         { id: 1, text: "" }, // address
         { id: 2, text: "" }, // phone number
-        // { id: 3, text: "" }, // photo
-        // { id: 4, text: "" }, // hours
-        // { id: 5, text: "" }, // rating
-        // { id: 6, text: "" }, // website
+        { id: 3, text: "" }, // rating
+        { id: 4, text: "" }, // website
+        // { id: 5, text: "" }, // photo
+        // { id: 6, text: "" }, // hours
       ]
     },
     methods: {
@@ -119,10 +119,10 @@ Vue.component('todo-item', {
             this.placeDetails[0].text = place.name;
             this.placeDetails[1].text = place.formatted_address;
             this.placeDetails[2].text = place.formatted_phone_number;
-            // this.placeDetails[3].text = place.photos[0].getUrl({'maxWidth' : 35, 'maxHeight' : 35}),
-            // this.placeDetails[4].text = place.opening_hours;
-            // this.placeDetails[5].text = place.rating;
-            // this.placeDetails[6].text = place.website;
+            this.placeDetails[3].text = place.rating;
+            this.placeDetails[4].text = place.website;
+            // this.placeDetails[5].text = place.photos[0].getUrl({'maxWidth' : 35, 'maxHeight' : 35}),
+            // this.placeDetails[6].text = place.opening_hours;
         }
     }
 })
