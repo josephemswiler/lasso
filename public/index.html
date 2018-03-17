@@ -18,64 +18,32 @@
 
 
     <nav>
-        <div class="nav-wrapper">
+        <div class="nav-wrapper  cyan darken-1">
+
+
+
             <a href="#" class="brand-logo center">Project-1</a>
 
             <ul id="slide-out" class="side-nav">
               
-                   
 
-
- <div class="slider">
-    <ul class="slides">
-      <li>
-        <img src="assets/images/downtown.jpg"> <!-- random image -->
-        <div class="caption center-align">
-          <h3>This is our big Tagline!</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-        </div>
-      </li>
-      <li>
-        <img src="assets/images/downtown.jpg>
-        <div class="caption left-align">
-          <h3>Left Aligned Caption</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-        </div>
-      </li>
-      <li>
-        <img src="https://lorempixel.com/580/250/nature/3"> <!-- random image -->
-        <div class="caption right-align">
-          <h3>Right Aligned Caption</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-        </div>
-      </li>
-      <li>
-        <img src="https://lorempixel.com/580/250/nature/4"> <!-- random image -->
-        <div class="caption center-align">
-          <h3>This is our big Tagline!</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-        </div>
-      </li>
-    </ul>
-  </div>
-      
-
-
-
-
-               <!-- <li>
+                <li>
                     <a href="#!">First Sidebar Link</a>
                 </li>
                 <li>
                     <a href="#!">Second Sidebar Link</a>
-                </li> -->
+                </li> 
 
             </ul>
             <a href="#" data-activates="slide-out" class="button-collapse show-on-large">
                 <i class="material-icons">menu</i>
+
+
             </a>
 
         </div>
+
+
     </nav>
 
     <div class="container">
@@ -86,14 +54,21 @@
             <!--note that this image is a placeholder and will be removed when the actual Api data is done-->
 
             <div class="col s12">
-                <!-- <img class="responsive-img" alt="UT Austin Map" src="assets/images/UT-Gmap.png"> -->
 
                 <div id="gmaps-app">
-                    <!-- {{ map }} -->
+
                 </div>
 
-                <!-- <div id="gmap"></div> -->
-
+                <div id="place-details">
+                    <ol>
+                        <todo-item
+                            v-for="item in placeDetails"
+                            v-bind:detail="item"
+                            v-bind:key="item.id">
+                        </todo-item>
+                    </ol>
+                </div>
+                
                 <span class="flow-text"></span>
             </div>
 
@@ -103,11 +78,11 @@
 
         <div class="row">
             <div class="col s12">
-                <a class="waves-effect waves-light btn-large">
+                <a class="waves-effect waves-light btn-large cyan darken-1">
                     <i class="material-icons left">cloud</i>Button</a>
-                <a class="waves-effect waves-light btn-large">
+                <a class="waves-effect waves-light btn-large cyan darken-1">
                     <i class="material-icons left">cloud</i>button</a>
-                <a class="waves-effect waves-light btn-large">
+                <a class="waves-effect waves-light btn-large cyan darken-1">
                     <i class="material-icons left">cloud</i>button</a>
             </div>
 
@@ -139,7 +114,7 @@
     <!--Import jQuery before materialize.js-->
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     
-    <!-- Compiled and minified JavaScript -->
+    <!-- Materialize -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
     <!-- Firebase -->
@@ -156,11 +131,6 @@
 
     <script type="text/javascript" src="assets/js/index.js"></script>
     <!-- <script src="assets/js/maps-api-config.js"></script> -->
-
-
-        </div>
-    </div>
-   
 
 </body>
 
