@@ -10,10 +10,20 @@ $(document).ready(function () {
     };
     firebase.initializeApp(config);
 
+    let api = "";
+    let searchTerm = "";
+    let queryURL = "";
 
     $(".button-collapse").sideNav();
 
     $('.slider').slider();
+
+
+    queryURL = "" + api + "" + searchTerm
+
+    $.get(queryURL).then(function(response) {
+        console.log(response)
+    });
 
 
 })
