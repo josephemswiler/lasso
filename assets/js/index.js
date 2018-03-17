@@ -10,8 +10,10 @@ $(document).ready(function () {
     };
     firebase.initializeApp(config);
 
+  
 
     $(".button-collapse").sideNav();
+
 
 
 })

@@ -20,31 +20,64 @@
               <ul id="slide-out" class="side-nav"class="collapsible" data-collapsible="accordion">
                     <ul class="collapsible" data-collapsible="expandable">
                    <li>
-                     <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+                     <div class="collapsible-header"><i class="material-icons">restaurant_menu</i>What Would You Like to Do</div>
                     <div class="collapsible-body">
-                      <p>
-                      <input type="checkbox" id="test5" />
-                      <label for="test5">Red</label>
-                      </p>
-                      <p>
-                      <input type="checkbox" id="test5" />
-                      <label for="test5">Red</label>
-                      </p>
-                      <p>
-                      <input type="checkbox" id="test5" />
-                      <label for="test5">Red</label>
-                      </p>
+                      <form class="whatToDo" action="#" method="post">
+                        <p>
+                        <input type="checkbox" id="test5" value="restaurant"/>
+                        <label for="test5">I want to eat</label>
+                        </p>
+                        <p>
+                        <input type="checkbox" id="test6" value="bar"/>
+                        <label for="test6">I want to drink</label>
+                        </p>
+                        <p>
+                        <input type="checkbox" id="test7" value="entertained"/>
+                        <label for="test7">I want to be entertained</label>
+                        </p>
+                      </form>
                    </div>
                    </li>
                    <li>
-                     <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-                     <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                     <div class="collapsible-header"><i class="material-icons">access_time</i>How much time do you have?</div>
+                     <div class="collapsible-body">
+                       <form class="timeAvailable" action="#" method="post">
+                         <p>
+                         <input type="checkbox" id="test8" value="two"/>
+                         <label for="test8">I have 2 hours</label>
+                         </p>
+                         <p>
+                         <input type="checkbox" id="test9" value="four"/>
+                         <label for="test9">I have 4 hours</label>
+                         </p>
+                         <p>
+                         <input type="checkbox" id="test10" value="five"/>
+                         <label for="test10">I have more than 5 hours</label>
+                         </p>
+                       </form></div>
                    </li>
                    <li>
-                     <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-                     <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                     <div class="collapsible-header"><i class="material-icons">directions_walk</i>How will you be travelling?</div>
+                     <div class="collapsible-body">
+                       <form class="transportation" action="#" method="post">
+                       <p>
+                       <input type="checkbox" id="test11" value="car"/>
+                       <label for="test11">By Car</label>
+                       </p>
+                       <p>
+                       <input type="checkbox" id="test12" value="walk"/>
+                       <label for="test12">On Foot</label>
+                       </p>
+                       <p>
+                       <input type="checkbox" id="test13" value="bicycle"/>
+                       <label for="test13">On a Bicycle</label>
+                       </p>
+                     </form></div>
                    </li>
-                  </ul>
+
+                   <button class="submit btn waves-effect waves-light" type="submit" name="action">Submit</button>
+                   </ul>
+
                 </ul>
 
                 <a href="#" data-activates="slide-out" class="button-collapse show-on-large">Plan Your Trip</a>
