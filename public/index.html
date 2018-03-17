@@ -43,13 +43,20 @@
             <!--note that this image is a placeholder and will be removed when the actual Api data is done-->
 
             <div class="col s12">
-                <!-- <img class="responsive-img" alt="UT Austin Map" src="assets/images/UT-Gmap.png"> -->
 
                 <div id="gmaps-app">
-                    <!-- {{ map }} -->
+
                 </div>
 
-                <!-- <div id="gmap"></div> -->
+                <div id="place-details">
+                    <ol>
+                        <todo-item
+                            v-for="item in placeDetails"
+                            v-bind:detail="item"
+                            v-bind:key="item.id">
+                        </todo-item>
+                    </ol>
+                </div>
 
                 <span class="flow-text"></span>
             </div>
@@ -95,8 +102,8 @@
 
     <!--Import jQuery before materialize.js-->
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    
-    <!-- Compiled and minified JavaScript -->
+
+    <!-- Materialize -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
     <!-- Firebase -->
@@ -113,11 +120,6 @@
 
     <script type="text/javascript" src="assets/js/index.js"></script>
     <!-- <script src="assets/js/maps-api-config.js"></script> -->
-
-
-        </div>
-    </div>
-
 
 </body>
 
