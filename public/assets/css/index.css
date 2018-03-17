@@ -37,3 +37,13 @@ height: auto;
 	width: 30%;
 	height: 100%;
 }
+
+.collapsible-header{
+	color:black;
+}
+.collapsible-body{
+	color:black;
+}
+.collapsible-body p{
+	padding-left:10px;
+}
