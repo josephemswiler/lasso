@@ -107,6 +107,10 @@
         </div>
 
 
+        <div id="add-destination">
+            <button v-on:click="addDest">Add Destination</button>
+            <button v-on:click="getPOI">Start Trip</button>
+        </div>
 
         <div class="row">
             <div class="col s12">
@@ -156,13 +160,13 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
 
     <!-- This needs to be before the Google Maps API call -->
+    <script src="assets/js/calculate-directions.js"></script>
     <script src="assets/js/vue-maps-api-config.js"></script>
     <!-- <script src="assets/js/maps-api-config.js"> </script> -->
     <!-- Google Maps API call -->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2IahrwPpyvfygnrvqEa_lP61ri9w3CxY&libraries=places&callback=gmapsCallback" type="text/javascript"></script>
 
     <script type="text/javascript" src="assets/js/index.js"></script>
-    <!-- <script src="assets/js/maps-api-config.js"></script> -->
 
 
         </div>
