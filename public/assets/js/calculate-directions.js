@@ -2,7 +2,7 @@ let addDestination = new Vue({
     el: '#add-destination',
     data: {
         waypoints: [],
-        // numWaypoints: 0,
+        totalDistance: 0,
     },
     methods: {
         addDest: function (placeId) {
@@ -42,8 +42,27 @@ let addDestination = new Vue({
                 if (status == 'OK') {
                     directionsDisplay.setDirections(result);
                     console.log("Directions results: ", result)
+                    computeTotalDistance.computeTotalDistance(result);
                 }
             });
         }
+    }
+});
+
+let computeTotalDistance = new Vue({
+    el: '#total-distance',
+    data: {
+        totalDistance: 0,
+    },
+    methods: {
+        computeTotalDistance(result) {
+            let total = 0;
+            let myroute = result.routes[0];
+            for (let i = 0; i < myroute.legs.length; i++) {
+              total += myroute.legs[i].distance.value;
+            }
+            total = total / 1000;
+            this.totalDistance = "Total trip distance: " + total + " km";
+          }
     }
 })
