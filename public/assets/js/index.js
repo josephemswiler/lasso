@@ -16,10 +16,10 @@ $(document).ready(function () {
 
     $(".button-collapse").sideNav();
 
-    queryURL = "" + api + "" + searchTerm
+    // queryURL = "" + api + "" + searchTerm
 
-    $.get(queryURL).then(function(response) {
-        console.log(response)
-    });
+    // $.get(queryURL).then(function(response) {
+    //     console.log(response)
+    // });
 
 })
