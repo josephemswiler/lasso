@@ -31,7 +31,7 @@ let app = new Vue({
                     app.map.setCenter(app.pos);
                     let request = {
                         location: app.pos,
-                        radius: '500',
+                        radius: '1609',
                         query: 'restaurant'
                     };
                     app.service = new google.maps.places.PlacesService(app.map);
