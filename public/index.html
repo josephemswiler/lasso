@@ -25,15 +25,15 @@
                     <div class="collapsible-body">
                       <form class="whatToDo" action="#" method="post">
                         <p>
-                        <input type="checkbox" id="test5" value="restaurant"/>
+                        <input type="checkbox" id="test5" class="choice" value="restaurant"/>
                         <label for="test5">I want to eat</label>
                         </p>
                         <p>
-                        <input type="checkbox" id="test6" value="bar"/>
+                        <input type="checkbox" id="test6" class="choice" value="bar"/>
                         <label for="test6">I want to drink</label>
                         </p>
                         <p>
-                        <input type="checkbox" id="test7" value="entertained"/>
+                        <input type="checkbox" id="test7" class="choice" value="entertained"/>
                         <label for="test7">I want to be entertained</label>
                         </p>
                       </form>
@@ -44,15 +44,15 @@
                      <div class="collapsible-body">
                        <form class="timeAvailable" action="#" method="post">
                          <p>
-                         <input type="checkbox" id="test8" value="two"/>
+                         <input type="radio" name="act" id="test8" class="choice" value="two"/>
                          <label for="test8">I have 2 hours</label>
                          </p>
                          <p>
-                         <input type="checkbox" id="test9" value="four"/>
+                         <input type="radio" name="act" id="test9" class="choice" value="four"/>
                          <label for="test9">I have 4 hours</label>
                          </p>
                          <p>
-                         <input type="checkbox" id="test10" value="five"/>
+                         <input type="radio" name="act" id="test10" class="choice" value="five"/>
                          <label for="test10">I have more than 5 hours</label>
                          </p>
                        </form></div>
@@ -62,21 +62,21 @@
                      <div class="collapsible-body">
                        <form class="transportation" action="#" method="post">
                        <p>
-                       <input type="checkbox" id="test11" value="car"/>
+                       <input type="radio" name="action" id="test11" class="choice" value="car"/>
                        <label for="test11">By Car</label>
                        </p>
                        <p>
-                       <input type="checkbox" id="test12" value="walk"/>
+                       <input type="radio" name="action" id="test12" class="choice" value="walk"/>
                        <label for="test12">On Foot</label>
                        </p>
                        <p>
-                       <input type="checkbox" id="test13" value="bicycle"/>
+                       <input type="radio" name="action" id="test13" class="choice" value="bicycle"/>
                        <label for="test13">On a Bicycle</label>
                        </p>
                      </form></div>
                    </li>
 
-                   <button class="submit btn waves-effect waves-light" type="submit" name="action">Submit</button>
+                   <button class="submit btn waves-effect waves-light" type="submit" name="actionSubmit">Submit</button>
                    </ul>
 
                 </ul>
@@ -111,6 +111,19 @@
             <button v-on:click="addDest">Add Destination</button>
             <button v-on:click="getPOI">Start Trip</button>
         </div>
+
+  <div class="container cards">
+
+    <div class="card small">
+          <ul id="v-for-object">
+            <li v-for="value in object">
+              {{value}}
+            </li>
+          </ul>
+        </div>
+
+  </div>
+
 
         <div class="row">
             <div class="col s12">
@@ -162,6 +175,7 @@
     <!-- This needs to be before the Google Maps API call -->
     <script src="assets/js/calculate-directions.js"></script>
     <script src="assets/js/vue-maps-api-config.js"></script>
+
     <!-- <script src="assets/js/maps-api-config.js"> </script> -->
     <!-- Google Maps API call -->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2IahrwPpyvfygnrvqEa_lP61ri9w3CxY&libraries=places&callback=gmapsCallback" type="text/javascript"></script>

@@ -75,6 +75,8 @@ let app = new Vue({
                         app.infoWindow.open(app.map, marker);
                         placeDetailsApp.showPlaceDetails(place);
                     }
+
+
                 });
             });
         },
@@ -99,7 +101,7 @@ Vue.component('todo-item', {
     props: ['detail'],
     template: '<li>{{ detail.text }}</li>'
 });
-  
+
 let placeDetailsApp = new Vue({
     el: '#place-details',
     data: {
@@ -125,3 +127,23 @@ let placeDetailsApp = new Vue({
         }
     }
 })
+
+
+
+
+// function createInfoCard(){
+// let createInfoCard =
+//
+// }
+
+
+
+// new Vue({
+//     el: '#v-for-object',
+//     data: {
+//       object:{
+//         name: ,
+//       }
+//     },
+//
+// })

@@ -52,3 +52,9 @@ label{
 	color:black;
 
 }
+.card.small{
+	width:200px;
+}
+.cards{
+	margin: 10px;
+}
