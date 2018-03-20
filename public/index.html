@@ -90,7 +90,6 @@
 
 
         <div class="row">
-            <!--note that this image is a placeholder and will be removed when the actual Api data is done-->
 
             <div class="col s12">
                 <!-- <img class="responsive-img" alt="UT Austin Map" src="assets/images/UT-Gmap.png"> -->
@@ -100,6 +99,14 @@
                 </div>
 
                 <!-- <div id="gmap"></div> -->
+
+                <div id="total-distance">
+                    {{ totalDistance }}
+                </div>
+
+                <div id="google-maps-link">
+                    <a v-bind:href ="googleMapsBuiltLink">Open step-by-step navigation in Google Maps</a>
+                </div>
 
                 <span class="flow-text"></span>
             </div>
@@ -115,10 +122,7 @@
   <div class="container cards">
 
     <div class="card small">
-          <ul id="v-for-object">
-            <li v-for="value in object">
-              {{value}}
-            </li>
+          <ul id="places">
           </ul>
         </div>
 
