@@ -16,14 +16,18 @@ $(document).ready(function () {
 
     $(".button-collapse").sideNav();
 
+<<<<<<< HEAD
     $('.slider').slider();
 
 
     queryURL = "" + api + "" + searchTerm
+=======
+    // queryURL = "" + api + "" + searchTerm
+>>>>>>> b8f84f4e21b4d1c12ffdb2e2375aea912ba27fac
 
-    $.get(queryURL).then(function(response) {
-        console.log(response)
-    });
+    // $.get(queryURL).then(function(response) {
+    //     console.log(response)
+    // });
 
 
 })

@@ -23,19 +23,19 @@ let app = new Vue({
             // Try HTML5 geolocation.
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
-                    let pos = {
+                    app.pos = {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
-                    app._data.infoWindow.setPosition(pos);
-                    app._data.map.setCenter(pos);
+                    app.infoWindow.setPosition(app.pos);
+                    app.map.setCenter(app.pos);
                     let request = {
-                        location: pos,
-                        radius: '500',
+                        location: app.pos,
+                        radius: '1609',
                         query: 'restaurant'
                     };
-                    app._data.service = new google.maps.places.PlacesService(app._data.map);
-                    app._data.service.nearbySearch(request, app.callback);
+                    app.service = new google.maps.places.PlacesService(app.map);
+                    app.service.nearbySearch(request, app.callback);
                 },
                 function () {
                     handleLocationError(true, this.infoWindow, this.map.getCenter());
@@ -68,11 +68,11 @@ let app = new Vue({
                 app._data.service.getDetails(request, function (place, status) {
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
                         console.log(place);
-                        console.log(place.formatted_address);
-                        app._data.infoWindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+                        app.currentPlace = request;
+                        app.infoWindow.setContent('<div><strong>' + place.name + '</strong><br>' +
                         'Place ID: ' + place.place_id + '<br>' +
                         place.formatted_address + '</div>');
-                        app._data.infoWindow.open(app._data.map, marker);
+                        app.infoWindow.open(app.map, marker);
                         placeDetailsApp.showPlaceDetails(place);
                     }
                 });
@@ -85,8 +85,7 @@ let app = new Vue({
                 'Error: The Geolocation service failed.' :
                 'Error: Your browser doesn\'t support geolocation.');
             this.infoWindow.open(this.map);
-        }
-
+        },
     }
 })
 
@@ -94,25 +93,25 @@ function gmapsCallback(){
     app.initMap()
 }
 console.log(app)
-console.log("Address: ", app._data.placeDetails)
+console.log("Address: ", app.placeDetails)
 
 Vue.component('todo-item', {
     props: ['detail'],
     template: '<li>{{ detail.text }}</li>'
-  })
+});
   
-  var placeDetailsApp = new Vue({
+let placeDetailsApp = new Vue({
     el: '#place-details',
     data: {
-      placeDetails: [
-        { id: 0, text: "" }, // name
-        { id: 1, text: "" }, // address
-        { id: 2, text: "" }, // phone number
-        { id: 3, text: "" }, // rating
-        { id: 4, text: "" }, // website
-        // { id: 5, text: "" }, // photo
-        // { id: 6, text: "" }, // hours
-      ]
+        placeDetails: [
+            { id: 0, text: "" }, // name
+            { id: 1, text: "" }, // address
+            { id: 2, text: "" }, // phone number
+            { id: 3, text: "" }, // rating
+            { id: 4, text: "" }, // website
+            // { id: 5, text: "" }, // photo
+            // { id: 6, text: "" }, // hours
+        ]
     },
     methods: {
         showPlaceDetails(place) {
