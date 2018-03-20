@@ -51,9 +51,18 @@ let app = new Vue({
                 for (let i = 0; i < results.length; i++) {
                     let place = results[i];
                     this.createMarker(results[i]);
+                    this.createList(results[i]);
                 }
             }
         },
+
+      createList(names){
+              var place=results[i]
+              var placesList = document.getElementById('places');
+              var li=document.createElement('li');
+              li.textContent(place.name);
+              placesList.appendChild(li);
+            },
 
         createMarker(place) {
             let placeLoc = place.geometry.location;
@@ -75,9 +84,18 @@ let app = new Vue({
                         app.infoWindow.open(app.map, marker);
                         placeDetailsApp.showPlaceDetails(place);
                     }
+
+
                 });
             });
         },
+
+        // createList(){
+        //     var placesList = document.getElementById('places');
+        //     var li=document.createElement('li');
+        //     li.textContent=(place.name);
+        //     placesList.appendChild(li);
+        //   }
 
         handleLocationError(browserHasGeolocation, infoWindow, pos) {
             this.infoWindow.setPosition(pos);
@@ -99,29 +117,49 @@ Vue.component('todo-item', {
     props: ['detail'],
     template: '<li>{{ detail.text }}</li>'
 });
-  
-let placeDetailsApp = new Vue({
-    el: '#place-details',
-    data: {
-        placeDetails: [
-            { id: 0, text: "" }, // name
-            { id: 1, text: "" }, // address
-            { id: 2, text: "" }, // phone number
-            { id: 3, text: "" }, // rating
-            { id: 4, text: "" }, // website
-            // { id: 5, text: "" }, // photo
-            // { id: 6, text: "" }, // hours
-        ]
-    },
-    methods: {
-        showPlaceDetails(place) {
-            this.placeDetails[0].text = place.name;
-            this.placeDetails[1].text = place.formatted_address;
-            this.placeDetails[2].text = place.formatted_phone_number;
-            this.placeDetails[3].text = place.rating;
-            this.placeDetails[4].text = place.website;
-            // this.placeDetails[5].text = place.photos[0].getUrl({'maxWidth' : 35, 'maxHeight' : 35}),
-            // this.placeDetails[6].text = place.opening_hours;
-        }
-    }
-})
+
+// let placeDetailsApp = new Vue({
+//     el: '#place-details',
+//     data: {
+//         placeDetails: [
+//             { id: 0, text: "" }, // name
+//             { id: 1, text: "" }, // address
+//             { id: 2, text: "" }, // phone number
+//             { id: 3, text: "" }, // rating
+//             { id: 4, text: "" }, // website
+//             // { id: 5, text: "" }, // photo
+//             // { id: 6, text: "" }, // hours
+//         ]
+//     },
+//     methods: {
+//         showPlaceDetails(place) {
+//             this.placeDetails[0].text = place.name;
+//             this.placeDetails[1].text = place.formatted_address;
+//             this.placeDetails[2].text = place.formatted_phone_number;
+//             this.placeDetails[3].text = place.rating;
+//             this.placeDetails[4].text = place.website;
+//             // this.placeDetails[5].text = place.photos[0].getUrl({'maxWidth' : 35, 'maxHeight' : 35}),
+//             // this.placeDetails[6].text = place.opening_hours;
+//         }
+//     }
+// })
+
+
+
+
+// function createInfoCard(){
+// let createInfoCard =
+//
+// }
+
+
+
+// new Vue({
+//     el: '#v-for-object',
+//     data: {
+//       object:{
+//         name: ,
+//       }
+//     },
+//
+// })
