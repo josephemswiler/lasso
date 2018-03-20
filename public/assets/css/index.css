@@ -32,3 +32,29 @@ height: auto;
 	height: 400px;
 	background-color: grey;
 }
+
+#place-details{
+	width: 30%;
+	height: 100%;
+}
+
+.collapsible-header{
+	color:black;
+}
+.collapsible-body{
+	color:black;
+}
+.collapsible-body p{
+	padding-left:10px;
+}
+
+label{
+	color:black;
+
+}
+.card.small{
+	width:200px;
+}
+.cards{
+	margin: 10px;
+}

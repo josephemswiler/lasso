@@ -6,13 +6,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- reset css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <!-- materialize css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <!-- local css -->
     <link rel="stylesheet" type="text/css" href="assets/css/index.css">
-</head>
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+
 
 <body>
 
@@ -21,18 +18,70 @@
         <div class="nav-wrapper">
             <a href="#" class="brand-logo center">Project-1</a>
 
-            <ul id="slide-out" class="side-nav">
-                <li>
-                    <a href="#!">First Sidebar Link</a>
-                </li>
-                <li>
-                    <a href="#!">Second Sidebar Link</a>
-                </li>
-            </ul>
-            <a href="#" data-activates="slide-out" class="button-collapse show-on-large">
-                <i class="material-icons">menu</i>
-            </a>
+              <ul id="slide-out" class="side-nav"class="collapsible" data-collapsible="accordion">
+                    <ul class="collapsible" data-collapsible="expandable">
+                   <li>
+                     <div class="collapsible-header"><i class="material-icons">restaurant_menu</i>What Would You Like to Do</div>
+                    <div class="collapsible-body">
+                      <form class="whatToDo" action="#" method="post">
+                        <p>
+                        <input type="checkbox" id="test5" class="choice" value="restaurant"/>
+                        <label for="test5">I want to eat</label>
+                        </p>
+                        <p>
+                        <input type="checkbox" id="test6" class="choice" value="bar"/>
+                        <label for="test6">I want to drink</label>
+                        </p>
+                        <p>
+                        <input type="checkbox" id="test7" class="choice" value="entertained"/>
+                        <label for="test7">I want to be entertained</label>
+                        </p>
+                      </form>
+                   </div>
+                   </li>
+                   <li>
+                     <div class="collapsible-header"><i class="material-icons">access_time</i>How much time do you have?</div>
+                     <div class="collapsible-body">
+                       <form class="timeAvailable" action="#" method="post">
+                         <p>
+                         <input type="radio" name="act" id="test8" class="choice" value="two"/>
+                         <label for="test8">I have 2 hours</label>
+                         </p>
+                         <p>
+                         <input type="radio" name="act" id="test9" class="choice" value="four"/>
+                         <label for="test9">I have 4 hours</label>
+                         </p>
+                         <p>
+                         <input type="radio" name="act" id="test10" class="choice" value="five"/>
+                         <label for="test10">I have more than 5 hours</label>
+                         </p>
+                       </form></div>
+                   </li>
+                   <li>
+                     <div class="collapsible-header"><i class="material-icons">directions_walk</i>How will you be travelling?</div>
+                     <div class="collapsible-body">
+                       <form class="transportation" action="#" method="post">
+                       <p>
+                       <input type="radio" name="action" id="test11" class="choice" value="car"/>
+                       <label for="test11">By Car</label>
+                       </p>
+                       <p>
+                       <input type="radio" name="action" id="test12" class="choice" value="walk"/>
+                       <label for="test12">On Foot</label>
+                       </p>
+                       <p>
+                       <input type="radio" name="action" id="test13" class="choice" value="bicycle"/>
+                       <label for="test13">On a Bicycle</label>
+                       </p>
+                     </form></div>
+                   </li>
 
+                   <button class="submit btn waves-effect waves-light" type="submit" name="actionSubmit">Submit</button>
+                   </ul>
+
+                </ul>
+
+                <a href="#" data-activates="slide-out" class="button-collapse show-on-large">Plan Your Trip</a>
         </div>
     </nav>
 
@@ -41,7 +90,6 @@
 
 
         <div class="row">
-            <!--note that this image is a placeholder and will be removed when the actual Api data is done-->
 
             <div class="col s12">
                 <!-- <img class="responsive-img" alt="UT Austin Map" src="assets/images/UT-Gmap.png"> -->
@@ -52,11 +100,33 @@
 
                 <!-- <div id="gmap"></div> -->
 
+                <div id="total-distance">
+                    {{ totalDistance }}
+                </div>
+
+                <div id="google-maps-link">
+                    <a v-bind:href ="googleMapsBuiltLink">Open step-by-step navigation in Google Maps</a>
+                </div>
+
                 <span class="flow-text"></span>
             </div>
 
         </div>
 
+
+        <div id="add-destination">
+            <button v-on:click="addDest">Add Destination</button>
+            <button v-on:click="getPOI">Start Trip</button>
+        </div>
+
+  <div class="container cards">
+
+    <div class="card small">
+          <ul id="places">
+          </ul>
+        </div>
+
+  </div>
 
 
         <div class="row">
@@ -95,8 +165,8 @@
 
 
     <!--Import jQuery before materialize.js-->
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
@@ -110,8 +180,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
 
     <!-- This needs to be before the Google Maps API call -->
+    <script src="assets/js/calculate-directions.js"></script>
     <script src="assets/js/vue-maps-api-config.js"></script>
 
+    <!-- <script src="assets/js/maps-api-config.js"> </script> -->
     <!-- Google Maps API call -->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2IahrwPpyvfygnrvqEa_lP61ri9w3CxY&libraries=places&callback=gmapsCallback" type="text/javascript"></script>
 
@@ -124,7 +196,7 @@
 
         </div>
     </div>
-   
+
 
 </body>
 
