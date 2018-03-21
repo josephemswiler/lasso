@@ -67,7 +67,7 @@ let app = new Vue({
                 };
                 app._data.service.getDetails(request, function (place, status) {
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        console.log(place);
+                        console.log(place, request);
                         app.placeDetails = place;
                         app.currentPlace = request;
                         app.infoWindow.setContent('<div><strong>' + place.name + '</strong><br>' +

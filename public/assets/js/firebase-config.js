@@ -11,14 +11,14 @@
     firebase.initializeApp(config);
 
     let database = firebase.database();
-    let currentUserName = "";
-    let currentUserTuple = new Object();
-    let savedUserNames = ""
-    let savedLocalUsers = JSON.parse(localStorage.getItem('localSavedUsers'));
-    if (!Array.isArray(savedLocalUsers)) {
-        savedLocalUsers = [];
-    }
+    let localUser = new Object();
+    let currentFavorites = [];
 
+    //combine profile page and sign out page, add places from google api to firebase, add lazy load of places on profile page
+
+    //   let placeList = addDestination.waypoints;
+
+    //Google login
     $('.google-login').click(function () {
 
         var provider = new firebase.auth.GoogleAuthProvider();
@@ -43,15 +43,16 @@
             // The signed-in user info.
             var user = result.user;
 
-            let name = user.email.substr(0, user.email.indexOf('@'));
+            userSetup(user)
 
-            currentUserName = name;
-
+<<<<<<< HEAD
             console.log(name)
 
             addUser(name);
             // ...
 >>>>>>> f82d7808b51f890e62af2300cdb9980dae30d9ad
+=======
+>>>>>>> 3877cbf21c1d52d60bb0b72802cc331668144dd7
         }).catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
@@ -60,94 +61,169 @@
             var email = error.email;
             // The firebase.auth.AuthCredential type that was used.
             var credential = error.credential;
-            // ...
         });
-    })
+    }) //Google login
 
-    //   let visitedPlaces = addDestination.waypoints;
+    function userSetup(currentUser) {
 
-    //users
-    //id
-    //name
-    //places
-    //google place id
-    //locateOn: false
-    //isActive: false
-    //search
-    //cost
-    //time
-    //stops add button, close button
+        $('.profile-img').attr('src', currentUser.photoURL);
 
-    function addUser(user) {
-        event.preventDefault();
-        console.log(user, savedLocalUsers)
-        // if (user === "") {
-        //     return;
-        // }
-        //checks if user exists, adds username to currentUserTuple.userName and key to currentUserTuple.userKey
-        if (savedLocalUsers.includes(user)) {
-            currentUserTuple.userName = currentUserName;
-            let key = "";
-            let tupleList = JSON.parse(localStorage.getItem('localSavedUsers'));
-            for (var i = 0; i < tupleList.length; i++) {
-                if ((tupleList[i].userName === currentUserName)) {
-                    key = tupleList[i].userKey;
-                }
+        $('.profile-name').text(currentUser.displayName);
+
+        database.ref('users/' + currentUser.G).on('value', function (snap) {
+            let data = snap.val()
+            if (!data) {
+                database.ref('users/' + currentUser.G).set({
+                    name: currentUser.displayName,
+                    isActive: false,
+                    authenticated: false
+                });
             }
-            currentUserTuple.userKey = key;
-            console.log("new " + currentUserTuple)
-        } else {
-            let key = firebase.database().ref('users').push().key;
-            currentUserTuple.userName = currentUserName;
-            currentUserTuple.userKey = key;
-            savedLocalUsers.push(currentUserTuple);
-            // savedNames.push(currentName);
-            localStorage.setItem('localUsers', JSON.stringify(savedLocalUsers));
-            database.ref('users/' + key).set({
-                name: currentUserName,
-                isActive: false
-                // places: currentPlaces,
-            });
-            console.log("existing " + currentUserTuple)
-        }
-        database.ref('users/' + currentUserTuple.userKey).update({
-            isActive: true
-        });
+        })
 
-        $('.auth-container').fadeOut("slow", function () {
+        localUser = JSON.parse(localStorage.getItem('firebase:authUser:' + currentUser.G + ':[DEFAULT]'));
 
-            $('.trip-container').fadeIn("slow", function () {});
-        });
-
-        if (currentUserTuple.userKey) {
-            database.ref('users/' + userTuple.userKey).onDisconnect().update({
+        if (currentUser.G) {
+            database.ref('users/' + currentUser.G).onDisconnect().update({
                 isActive: false
             })
         }
-    } //addUser
+    }
 
+    //Sign out of current login
     $('.signout').click(function () {
 
         firebase.auth().signOut().then(function () {
-          // Sign-out successful.
-        }).catch(function (error) {
-          // An error happened.
-        });
-      })
 
+            database.ref('users/' + localUser.apiKey).update({
+                isActive: false,
+                authenticated: false
+            })
+
+        }).catch(function (error) {
+            // An error happened.
+        });
+    }) //Sign out of current login
+
+    //listen for state change
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-          console.log('User is signed in.')
-          $('.signout').css('display', 'inline-block');
-        //   $('.auth-container').hide();
-        //   $('.trip-container').show();
-    
-        } else {
-          $('.signout').css('display', 'none');
-          console.log('No user is signed in.')
-        //   $('.auth-container').show();
-        //   $('.trip-container').hide();
-        }
-      });
+            $('.signout')
+                .css('display', 'inline-block')
 
+            $('.google-login').css('display', 'none');
+
+            $('.auth-message').text("You are signed in with Google as " + user.displayName + ".")
+
+            $('.trip-tab').removeClass('disabled')
+            $('.trip-tab a').addClass('active')
+            $('.profile-tab').removeClass('disabled')
+            $('.auth-tab a').removeClass('active').text('Sign Out')
+
+            userSetup(user)
+
+            database.ref('users/' + user.G).update({
+                isActive: true,
+                authenticated: true
+            })
+
+        } else {
+            $('.google-login')
+                .css('display', 'inline-block')
+
+            $('.signout').css('display', 'none');
+
+            $('.auth-message').text("Sign in with your Google Account.")
+
+            $('.trip-tab').addClass('disabled')
+            $('.trip-tab a').removeClass('active')
+            $('.profile-tab').addClass('disabled')
+            $('.auth-tab a').addClass('active').text('Sign In')
+
+        }
+    }); //listen for state change
+
+    $('.fav-star').click(function () {
+        if ($(this).hasClass('grey-text')) {
+            $(this)
+                .removeClass('grey-text text-darken-1')
+                .addClass('deep-orange-text text-lighten-1')
+                .text('star')
+
+
+            database.ref('users/' + localUser.apiKey + '/favoritePlaces/').on("value", function (snap) {
+
+                snap.forEach(function (data) {
+
+                    database.ref('users/' + localUser.apiKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
+                        if (currentFavorites.includes(snap.val())) {} else {
+                            currentFavorites.push(snap.val())
+                        }
+                    });
+                });
+            });
+
+            console.log(currentFavorites)
+
+            if (currentFavorites.includes($(this).parent().find('p').text())) {
+
+            } else {
+
+                database.ref('users/' + localUser.apiKey + '/favoritePlaces/').push($(this).parent().find('p').text())
+
+            }
+
+        } else {
+            $(this)
+                .removeClass('deep-orange-text text-lighten-1')
+                .addClass('grey-text text-darken-1')
+                .text('star_border')
+
+                database.ref('users/' + localUser.apiKey + '/favoritePlaces/').on("value", function (snap) {
+                    // console.log(snap.val());
+                    snap.forEach(function (data) {
+                        // console.log(data.key);
+    
+                        database.ref('users/' + localUser.apiKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
+
+                            console.log(($(this).parent().find('p').text())) //here
+
+                            if (($(this).parent().find('p').text()) === (snap.val())) {
+                                
+                                database.ref('users/' + localUser.apiKey + '/favoritePlaces/' + data.key).remove();
+
+                                currentFavorites.splice(currentFavorites.indexOf($(this).parent().find('p').text()),1)
+
+                            } else {
+                                
+                            }
+                        });
+                    });
+                });
+
+            
+
+
+        }
+    })
+
+    // $(document).on('click', '.fav-star', function () {
+
+    //     //firebase delete
+    //     database.ref("users/" + tupleList[currentIndex].userKey).remove(); 
+
+    //     //local delete
+
+    //     tupleList.splice(currentIndex, 1);
+
+    //     savedNames.splice(currentIndex, 1); 
+
+    //     savedUsers = tupleList;
+
+    //     localStorage.setItem('localUsers', JSON.stringify(savedUsers));
+
+    //     $(this).parent().remove();
+
+    //     location.reload();
+    // });
 })()
