@@ -48,10 +48,25 @@ height: auto;
 	padding-left:10px;
 }
 
-.auth-container{
+.auth-container, 
+.profile-container {
+	text-align: center;
+	width: 70%;
+	
+}
+
+.nav-extended {
 	text-align: center;
 }
 
-.trip-container{
-	display: none;
+.auth-btns a {
+	width: 80%;
+}
+
+.poi-collection a {
+	width: 100%;
+}
+
+.poi-div {
+	margin-top: 20px;
 }
