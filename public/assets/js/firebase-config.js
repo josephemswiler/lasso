@@ -11,14 +11,13 @@
     firebase.initializeApp(config);
 
     let database = firebase.database();
-    let currentUserName = "";
-    let currentUserTuple = new Object();
-    let savedUserNames = ""
-    let savedLocalUsers = JSON.parse(localStorage.getItem('localSavedUsers'));
-    if (!Array.isArray(savedLocalUsers)) {
-        savedLocalUsers = [];
-    }
+    let localUser = new Object();
 
+    //combine profile page and sign out page, add places from google api to firebase, add lazy load of places on profile page
+
+    //   let placeList = addDestination.waypoints;
+
+    //Google login
     $('.google-login').click(function () {
 
         var provider = new firebase.auth.GoogleAuthProvider();
@@ -29,14 +28,8 @@
             // The signed-in user info.
             var user = result.user;
 
-            let name = user.email.substr(0, user.email.indexOf('@'));
+            userSetup(user)
 
-            currentUserName = name;
-
-            console.log(name)
-
-            addUser(name);
-            // ...
         }).catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
@@ -45,94 +38,78 @@
             var email = error.email;
             // The firebase.auth.AuthCredential type that was used.
             var credential = error.credential;
-            // ...
         });
-    })
+    }) //Google login
 
-    //   let visitedPlaces = addDestination.waypoints;
+    function userSetup(currentUser) {
 
-    //users
-    //id
-    //name
-    //places
-    //google place id
-    //locateOn: false
-    //isActive: false
-    //search
-    //cost
-    //time
-    //stops add button, close button
+        $('.profile-img').attr('src', currentUser.photoURL);
 
-    function addUser(user) {
-        event.preventDefault();
-        console.log(user, savedLocalUsers)
-        // if (user === "") {
-        //     return;
-        // }
-        //checks if user exists, adds username to currentUserTuple.userName and key to currentUserTuple.userKey
-        if (savedLocalUsers.includes(user)) {
-            currentUserTuple.userName = currentUserName;
-            let key = "";
-            let tupleList = JSON.parse(localStorage.getItem('localSavedUsers'));
-            for (var i = 0; i < tupleList.length; i++) {
-                if ((tupleList[i].userName === currentUserName)) {
-                    key = tupleList[i].userKey;
-                }
-            }
-            currentUserTuple.userKey = key;
-            console.log("new " + currentUserTuple)
-        } else {
-            let key = firebase.database().ref('users').push().key;
-            currentUserTuple.userName = currentUserName;
-            currentUserTuple.userKey = key;
-            savedLocalUsers.push(currentUserTuple);
-            // savedNames.push(currentName);
-            localStorage.setItem('localUsers', JSON.stringify(savedLocalUsers));
-            database.ref('users/' + key).set({
-                name: currentUserName,
-                isActive: false
-                // places: currentPlaces,
-            });
-            console.log("existing " + currentUserTuple)
-        }
-        database.ref('users/' + currentUserTuple.userKey).update({
-            isActive: true
+        $('.profile-name').text(currentUser.displayName);
+
+        database.ref('users/' + currentUser.G).set({
+            name: currentUser.displayName,
+            isActive: true,
+            authenticated: true,
+            // places: placeList,
         });
 
-        $('.auth-container').fadeOut("slow", function () {
+        localUser = JSON.parse(localStorage.getItem('firebase:authUser:' + currentUser.G + ':[DEFAULT]'));
 
-            $('.trip-container').fadeIn("slow", function () {});
-        });
-
-        if (currentUserTuple.userKey) {
-            database.ref('users/' + userTuple.userKey).onDisconnect().update({
+        if (currentUser.G) {
+            database.ref('users/' + currentUser.G).onDisconnect().update({
                 isActive: false
             })
         }
-    } //addUser
+    }
 
+    //Sign out of current login
     $('.signout').click(function () {
 
         firebase.auth().signOut().then(function () {
-          // Sign-out successful.
-        }).catch(function (error) {
-          // An error happened.
-        });
-      })
 
+            database.ref('users/' + localUser.apiKey).update({
+                isActive: false,
+                authenticated: false
+            })
+
+        }).catch(function (error) {
+            // An error happened.
+        });
+    }) //Sign out of current login
+
+    //listen for state change
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-          console.log('User is signed in.')
-          $('.signout').css('display', 'inline-block');
-        //   $('.auth-container').hide();
-        //   $('.trip-container').show();
-    
+            $('.signout')
+                .css('display', 'inline-block')
+                
+            $('.google-login').css('display', 'none');
+
+            $('.auth-message').text("You are signed in with Google as " + user.displayName + ".")
+
+            $('.trip-tab').removeClass('disabled')
+            $('.trip-tab a').addClass('active')
+            $('.profile-tab').removeClass('disabled')
+            $('.auth-tab a').removeClass('active')
+
+            userSetup(user)
+
         } else {
-          $('.signout').css('display', 'none');
-          console.log('No user is signed in.')
-        //   $('.auth-container').show();
-        //   $('.trip-container').hide();
+            $('.google-login')
+                .css('display', 'inline-block')
+               
+            $('.signout').css('display', 'none');
+            
+            $('.auth-message').text("Sign in with your Google Account.")
+
+            $('.trip-tab').addClass('disabled')
+            $('.trip-tab a').removeClass('active')
+            $('.profile-tab').addClass('disabled')
+            $('.auth-tab a').addClass('active')
+
         }
-      });
+    }); //listen for state change
 
 })()
+
