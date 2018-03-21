@@ -15,11 +15,10 @@
 </head>
 
 <body>
-
+    <!-- Navbar -->
     <nav>
         <div class="nav-wrapper">
             <a href="#" class="brand-logo center">Project-1</a>
-
             <ul id="slide-out" class="side-nav" class="collapsible" data-collapsible="accordion">
                 <ul class="collapsible" data-collapsible="expandable">
                     <li>
@@ -82,15 +81,13 @@
                             </form>
                         </div>
                     </li>
-
                     <button class="submit btn waves-effect waves-light" type="submit" name="action">Submit</button>
                 </ul>
-
             </ul>
-
             <a href="#" data-activates="slide-out" class="button-collapse show-on-large">Plan Your Trip</a>
         </div>
     </nav>
+    <!-- Navbar -->
     <!-- Auth Section -->
     <div class="container auth-container">
         <div class="card">
@@ -121,44 +118,31 @@
         </div>
     </div>
     <!-- Auth Section -->
+    <!-- Trip Section -->
     <div class="container">
-
-
-
         <div class="row">
-
             <div class="col s12">
-
                 <div id="gmaps-app">
-
                 </div>
-
                 <div id="place-details">
                     <ol>
                         <todo-item v-for="item in placeDetails" v-bind:detail="item" v-bind:key="item.id">
                         </todo-item>
                     </ol>
                 </div>
-
                 <div id="total-distance">
                     {{ totalDistance }}
                 </div>
-
                 <div id="google-maps-link">
                     <a v-bind:href="googleMapsBuiltLink">Open step-by-step navigation in Google Maps</a>
                 </div>
-
                 <span class="flow-text"></span>
             </div>
-
         </div>
-
-
         <div id="add-destination">
             <button v-on:click="addDest">Add Destination</button>
             <button v-on:click="getPOI">Start Trip</button>
         </div>
-
         <div class="row">
             <div class="col s12">
                 <a class="waves-effect waves-light btn-large">
@@ -168,31 +152,9 @@
                 <a class="waves-effect waves-light btn-large">
                     <i class="material-icons left">cloud</i>button</a>
             </div>
-
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
-
-
-
-
-
-
-
-
-
-
+    <!-- Trip Section -->
 
     <!--Import jQuery before materialize.js-->
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
