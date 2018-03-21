@@ -16,78 +16,111 @@
 
 <body>
 
-  <nav>
-      <div class="nav-wrapper">
-          <a href="#" class="brand-logo center">Project-1</a>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">Project-1</a>
 
-            <ul id="slide-out" class="side-nav"class="collapsible" data-collapsible="accordion">
-                  <ul class="collapsible" data-collapsible="expandable">
-                 <li>
-                   <div class="collapsible-header"><i class="material-icons">restaurant_menu</i>What Would You Like to Do</div>
-                  <div class="collapsible-body">
-                    <form class="whatToDo" action="#" method="post">
-                      <p>
-                      <input type="checkbox" id="test5" value="restaurant"/>
-                      <label for="test5">I want to eat</label>
-                      </p>
-                      <p>
-                      <input type="checkbox" id="test6" value="bar"/>
-                      <label for="test6">I want to drink</label>
-                      </p>
-                      <p>
-                      <input type="checkbox" id="test7" value="entertained"/>
-                      <label for="test7">I want to be entertained</label>
-                      </p>
-                    </form>
-                 </div>
-                 </li>
-                 <li>
-                   <div class="collapsible-header"><i class="material-icons">access_time</i>How much time do you have?</div>
-                   <div class="collapsible-body">
-                     <form class="timeAvailable" action="#" method="post">
-                       <p>
-                       <input type="checkbox" id="test8" value="two"/>
-                       <label for="test8">I have 2 hours</label>
-                       </p>
-                       <p>
-                       <input type="checkbox" id="test9" value="four"/>
-                       <label for="test9">I have 4 hours</label>
-                       </p>
-                       <p>
-                       <input type="checkbox" id="test10" value="five"/>
-                       <label for="test10">I have more than 5 hours</label>
-                       </p>
-                     </form></div>
-                 </li>
-                 <li>
-                   <div class="collapsible-header"><i class="material-icons">directions_walk</i>How will you be travelling?</div>
-                   <div class="collapsible-body">
-                     <form class="transportation" action="#" method="post">
-                     <p>
-                     <input type="checkbox" id="test11" value="car"/>
-                     <label for="test11">By Car</label>
-                     </p>
-                     <p>
-                     <input type="checkbox" id="test12" value="walk"/>
-                     <label for="test12">On Foot</label>
-                     </p>
-                     <p>
-                     <input type="checkbox" id="test13" value="bicycle"/>
-                     <label for="test13">On a Bicycle</label>
-                     </p>
-                   </form></div>
-                 </li>
+            <ul id="slide-out" class="side-nav" class="collapsible" data-collapsible="accordion">
+                <ul class="collapsible" data-collapsible="expandable">
+                    <li>
+                        <div class="collapsible-header">
+                            <i class="material-icons">restaurant_menu</i>What Would You Like to Do</div>
+                        <div class="collapsible-body">
+                            <form class="whatToDo" action="#" method="post">
+                                <p>
+                                    <input type="checkbox" id="test5" value="restaurant" />
+                                    <label for="test5">I want to eat</label>
+                                </p>
+                                <p>
+                                    <input type="checkbox" id="test6" value="bar" />
+                                    <label for="test6">I want to drink</label>
+                                </p>
+                                <p>
+                                    <input type="checkbox" id="test7" value="entertained" />
+                                    <label for="test7">I want to be entertained</label>
+                                </p>
+                            </form>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header">
+                            <i class="material-icons">access_time</i>How much time do you have?</div>
+                        <div class="collapsible-body">
+                            <form class="timeAvailable" action="#" method="post">
+                                <p>
+                                    <input type="checkbox" id="test8" value="two" />
+                                    <label for="test8">I have 2 hours</label>
+                                </p>
+                                <p>
+                                    <input type="checkbox" id="test9" value="four" />
+                                    <label for="test9">I have 4 hours</label>
+                                </p>
+                                <p>
+                                    <input type="checkbox" id="test10" value="five" />
+                                    <label for="test10">I have more than 5 hours</label>
+                                </p>
+                            </form>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header">
+                            <i class="material-icons">directions_walk</i>How will you be travelling?</div>
+                        <div class="collapsible-body">
+                            <form class="transportation" action="#" method="post">
+                                <p>
+                                    <input type="checkbox" id="test11" value="car" />
+                                    <label for="test11">By Car</label>
+                                </p>
+                                <p>
+                                    <input type="checkbox" id="test12" value="walk" />
+                                    <label for="test12">On Foot</label>
+                                </p>
+                                <p>
+                                    <input type="checkbox" id="test13" value="bicycle" />
+                                    <label for="test13">On a Bicycle</label>
+                                </p>
+                            </form>
+                        </div>
+                    </li>
 
-                 <button class="submit btn waves-effect waves-light" type="submit" name="action">Submit</button>
-                 </ul>
+                    <button class="submit btn waves-effect waves-light" type="submit" name="action">Submit</button>
+                </ul>
 
-              </ul>
+            </ul>
 
-              <a href="#" data-activates="slide-out" class="button-collapse show-on-large">Plan Your Trip</a>
-      </div>
-  </nav>
-
-
+            <a href="#" data-activates="slide-out" class="button-collapse show-on-large">Plan Your Trip</a>
+        </div>
+    </nav>
+    <!-- Auth Section -->
+    <div class="container auth-container">
+        <div class="card">
+            <div class="card-content grey-text text-darken-1">
+                <h5>Select a method to login</h5>
+            </div>
+            <div class="card-tabs">
+                <ul class="tabs tabs-fixed-width deep-orange-text text-lighten-1">
+                    <li class="tab">
+                        <a class="active deep-orange-text text-lighten-1" href="#test5">Google</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-content grey lighten-4">
+                <div id="test5">
+                    <h1>
+                        <i class="fab fa-google grey-text text-darken-1"></i>
+                    </h1>
+                    <a class="waves-effect waves-light amber lighten-1 btn-large google-login">
+                        <i class="material-icons left">cloud</i>Login with Google</a>
+                    <br/>
+                    <br/>
+                    <a class="waves-effect waves-light amber lighten-1 btn-large signout">
+                        <i class="material-icons left">cloud_off</i> Sign Out</a>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Auth Section -->
     <div class="container">
 
 
@@ -102,10 +135,7 @@
 
                 <div id="place-details">
                     <ol>
-                        <todo-item
-                            v-for="item in placeDetails"
-                            v-bind:detail="item"
-                            v-bind:key="item.id">
+                        <todo-item v-for="item in placeDetails" v-bind:detail="item" v-bind:key="item.id">
                         </todo-item>
                     </ol>
                 </div>
@@ -115,7 +145,7 @@
                 </div>
 
                 <div id="google-maps-link">
-                    <a v-bind:href ="googleMapsBuiltLink">Open step-by-step navigation in Google Maps</a>
+                    <a v-bind:href="googleMapsBuiltLink">Open step-by-step navigation in Google Maps</a>
                 </div>
 
                 <span class="flow-text"></span>
@@ -184,7 +214,8 @@
     <script src="assets/js/vue-maps-api-config.js"></script>
 
     <!-- Google Maps API call -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2IahrwPpyvfygnrvqEa_lP61ri9w3CxY&libraries=places&callback=gmapsCallback" type="text/javascript"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2IahrwPpyvfygnrvqEa_lP61ri9w3CxY&libraries=places&callback=gmapsCallback"
+        type="text/javascript"></script>
 
     <!-- Local JS -->
     <script type="text/javascript" src="assets/js/index.js"></script>
