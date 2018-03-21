@@ -6,84 +6,87 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/index.css">
+    <!-- reset css -->
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-
+    <!-- materialize css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <!-- local css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/index.css">
+</head>
 
 <body>
 
+  <nav>
+      <div class="nav-wrapper">
+          <a href="#" class="brand-logo center">Project-1</a>
 
-    <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo center">Project-1</a>
-
-              <ul id="slide-out" class="side-nav"class="collapsible" data-collapsible="accordion">
-                    <ul class="collapsible" data-collapsible="expandable">
-                   <li>
-                     <div class="collapsible-header"><i class="material-icons">restaurant_menu</i>What Would You Like to Do</div>
-                    <div class="collapsible-body">
-                      <form class="whatToDo" action="#" method="post">
-                        <p>
-                        <input type="checkbox" id="test5" class="choice" value="restaurant"/>
-                        <label for="test5">I want to eat</label>
-                        </p>
-                        <p>
-                        <input type="checkbox" id="test6" class="choice" value="bar"/>
-                        <label for="test6">I want to drink</label>
-                        </p>
-                        <p>
-                        <input type="checkbox" id="test7" class="choice" value="entertained"/>
-                        <label for="test7">I want to be entertained</label>
-                        </p>
-                      </form>
-                   </div>
-                   </li>
-                   <li>
-                     <div class="collapsible-header"><i class="material-icons">access_time</i>How much time do you have?</div>
-                     <div class="collapsible-body">
-                       <form class="timeAvailable" action="#" method="post">
-                         <p>
-                         <input type="radio" name="act" id="test8" class="choice" value="two"/>
-                         <label for="test8">I have 2 hours</label>
-                         </p>
-                         <p>
-                         <input type="radio" name="act" id="test9" class="choice" value="four"/>
-                         <label for="test9">I have 4 hours</label>
-                         </p>
-                         <p>
-                         <input type="radio" name="act" id="test10" class="choice" value="five"/>
-                         <label for="test10">I have more than 5 hours</label>
-                         </p>
-                       </form></div>
-                   </li>
-                   <li>
-                     <div class="collapsible-header"><i class="material-icons">directions_walk</i>How will you be travelling?</div>
-                     <div class="collapsible-body">
-                       <form class="transportation" action="#" method="post">
+            <ul id="slide-out" class="side-nav"class="collapsible" data-collapsible="accordion">
+                  <ul class="collapsible" data-collapsible="expandable">
+                 <li>
+                   <div class="collapsible-header"><i class="material-icons">restaurant_menu</i>What Would You Like to Do</div>
+                  <div class="collapsible-body">
+                    <form class="whatToDo" action="#" method="post">
+                      <p>
+                      <input type="checkbox" id="test5" value="restaurant"/>
+                      <label for="test5">I want to eat</label>
+                      </p>
+                      <p>
+                      <input type="checkbox" id="test6" value="bar"/>
+                      <label for="test6">I want to drink</label>
+                      </p>
+                      <p>
+                      <input type="checkbox" id="test7" value="entertained"/>
+                      <label for="test7">I want to be entertained</label>
+                      </p>
+                    </form>
+                 </div>
+                 </li>
+                 <li>
+                   <div class="collapsible-header"><i class="material-icons">access_time</i>How much time do you have?</div>
+                   <div class="collapsible-body">
+                     <form class="timeAvailable" action="#" method="post">
                        <p>
-                       <input type="radio" name="action" id="test11" class="choice" value="car"/>
-                       <label for="test11">By Car</label>
+                       <input type="checkbox" id="test8" value="two"/>
+                       <label for="test8">I have 2 hours</label>
                        </p>
                        <p>
-                       <input type="radio" name="action" id="test12" class="choice" value="walk"/>
-                       <label for="test12">On Foot</label>
+                       <input type="checkbox" id="test9" value="four"/>
+                       <label for="test9">I have 4 hours</label>
                        </p>
                        <p>
-                       <input type="radio" name="action" id="test13" class="choice" value="bicycle"/>
-                       <label for="test13">On a Bicycle</label>
+                       <input type="checkbox" id="test10" value="five"/>
+                       <label for="test10">I have more than 5 hours</label>
                        </p>
                      </form></div>
-                   </li>
+                 </li>
+                 <li>
+                   <div class="collapsible-header"><i class="material-icons">directions_walk</i>How will you be travelling?</div>
+                   <div class="collapsible-body">
+                     <form class="transportation" action="#" method="post">
+                     <p>
+                     <input type="checkbox" id="test11" value="car"/>
+                     <label for="test11">By Car</label>
+                     </p>
+                     <p>
+                     <input type="checkbox" id="test12" value="walk"/>
+                     <label for="test12">On Foot</label>
+                     </p>
+                     <p>
+                     <input type="checkbox" id="test13" value="bicycle"/>
+                     <label for="test13">On a Bicycle</label>
+                     </p>
+                   </form></div>
+                 </li>
 
-                   <button class="submit btn waves-effect waves-light" type="submit" name="actionSubmit">Submit</button>
-                   </ul>
+                 <button class="submit btn waves-effect waves-light" type="submit" name="action">Submit</button>
+                 </ul>
 
-                </ul>
+              </ul>
 
-                <a href="#" data-activates="slide-out" class="button-collapse show-on-large">Plan Your Trip</a>
-        </div>
-    </nav>
+              <a href="#" data-activates="slide-out" class="button-collapse show-on-large">Plan Your Trip</a>
+      </div>
+  </nav>
+
 
     <div class="container">
 
@@ -92,13 +95,20 @@
         <div class="row">
 
             <div class="col s12">
-                <!-- <img class="responsive-img" alt="UT Austin Map" src="assets/images/UT-Gmap.png"> -->
 
                 <div id="gmaps-app">
-                    <!-- {{ map }} -->
+
                 </div>
 
-                <!-- <div id="gmap"></div> -->
+                <div id="place-details">
+                    <ol>
+                        <todo-item
+                            v-for="item in placeDetails"
+                            v-bind:detail="item"
+                            v-bind:key="item.id">
+                        </todo-item>
+                    </ol>
+                </div>
 
                 <div id="total-distance">
                     {{ totalDistance }}
@@ -118,16 +128,6 @@
             <button v-on:click="addDest">Add Destination</button>
             <button v-on:click="getPOI">Start Trip</button>
         </div>
-
-  <div class="container cards">
-
-    <div class="card small">
-          <ul id="places">
-          </ul>
-        </div>
-
-  </div>
-
 
         <div class="row">
             <div class="col s12">
@@ -165,9 +165,9 @@
 
 
     <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
-    <!-- Compiled and minified JavaScript -->
+    <!-- Materialize -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
     <!-- Firebase -->
@@ -183,20 +183,11 @@
     <script src="assets/js/calculate-directions.js"></script>
     <script src="assets/js/vue-maps-api-config.js"></script>
 
-    <!-- <script src="assets/js/maps-api-config.js"> </script> -->
     <!-- Google Maps API call -->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2IahrwPpyvfygnrvqEa_lP61ri9w3CxY&libraries=places&callback=gmapsCallback" type="text/javascript"></script>
 
     <!-- Local JS -->
     <script type="text/javascript" src="assets/js/index.js"></script>
-
-
-    <!-- <script src="assets/js/maps-api-config.js"></script> -->
-
-
-        </div>
-    </div>
-
 
 </body>
 
