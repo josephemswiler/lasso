@@ -47,3 +47,7 @@ height: auto;
 .collapsible-body p{
 	padding-left:10px;
 }
+
+.auth-container{
+	display: none;
+}
