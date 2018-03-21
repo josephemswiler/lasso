@@ -49,5 +49,9 @@ height: auto;
 }
 
 .auth-container{
+	text-align: center;
+}
+
+.trip-container{
 	display: none;
 }
