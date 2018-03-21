@@ -13,7 +13,7 @@
     let database = firebase.database();
     let currentUserName = "";
     let currentUserTuple = new Object();
-  
+    let savedUserNames
     let savedLocalUsers = JSON.parse(localStorage.getItem('localSavedUsers'));
     if (!Array.isArray(savedUserNames)) {
       savedUserNames = [];
