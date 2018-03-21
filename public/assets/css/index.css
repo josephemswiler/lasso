@@ -50,6 +50,7 @@ height: auto;
 
 .auth-container{
 	text-align: center;
+	display: none;
 }
 
 .trip-container{

@@ -110,7 +110,7 @@ let placeDetailsApp = new Vue({
             { id: 2, text: "" }, // phone number
             { id: 3, text: "" }, // rating
             { id: 4, text: "" }, // website
-            // { id: 5, text: "" }, // photo
+            { id: 5, text: "" }, // photo
             // { id: 6, text: "" }, // hours
         ]
     },
@@ -121,7 +121,8 @@ let placeDetailsApp = new Vue({
             this.placeDetails[2].text = place.formatted_phone_number;
             this.placeDetails[3].text = place.rating;
             this.placeDetails[4].text = place.website;
-            // this.placeDetails[5].text = place.photos[0].getUrl({'maxWidth' : 35, 'maxHeight' : 35}),
+            this.placeDetails[5].text = "<img src='" + app.placeDetails.photos[0].getUrl({maxWidth: 1000, maxHeight: 1000}) + "' alt='Photo'"
+            
             // this.placeDetails[6].text = place.opening_hours;
         }
     }

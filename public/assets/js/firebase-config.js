@@ -32,6 +32,7 @@
           let name = user.email.substr(0, user.email.indexOf('@'));
     
           currentUserName = name;
+          console.log(currentUserName);
           
           addUser(currentUserName);
           // ...
