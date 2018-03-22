@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css?family=Mrs+Sheppards');
+
 html, body{
 	height: 100%;
 	margin: 0;
@@ -12,7 +15,10 @@ height: auto;
 
 }
 
-
+.brand-logo{
+	font-family: 'Mrs Sheppards', cursive;
+	margin-bottom: 15px;
+}
 .responsive-img{
 
 width: 100%;
@@ -53,6 +59,10 @@ height: auto;
 	text-align: center;
 	width: 70%;
 	
+}
+
+.profile-img{
+	max-width: 300px;
 }
 
 .nav-extended {
