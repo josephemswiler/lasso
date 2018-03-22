@@ -34,8 +34,8 @@ height: auto;
 }
 
 #place-details{
-	width: 30%;
-	height: 100%;
+	width: 100%;
+	height: 90%;
 }
 
 .collapsible-header{
@@ -46,4 +46,8 @@ height: auto;
 }
 .collapsible-body p{
 	padding-left:10px;
+}
+.card{
+	width: 30%;
+	height: 100%;
 }

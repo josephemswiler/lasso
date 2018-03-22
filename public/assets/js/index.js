@@ -23,3 +23,12 @@ $(document).ready(function () {
     // });
 
 })
+// var infocard=new Vue({
+//   el:'info-card',
+//   method:{
+//     addDest: function(createElement){
+//       $("")
+//
+//     }
+//   }
+// })

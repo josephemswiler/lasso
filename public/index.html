@@ -27,15 +27,15 @@
                   <div class="collapsible-body">
                     <form class="whatToDo" action="#" method="post">
                       <p>
-                      <input type="checkbox" id="test5" value="restaurant"/>
+                      <input type="checkbox" id="test5" class="choice" value="restaurant"/>
                       <label for="test5">I want to eat</label>
                       </p>
                       <p>
-                      <input type="checkbox" id="test6" value="bar"/>
+                      <input type="checkbox" id="test6" class="choice" value="bar"/>
                       <label for="test6">I want to drink</label>
                       </p>
                       <p>
-                      <input type="checkbox" id="test7" value="entertained"/>
+                      <input type="checkbox" id="test7" class="choice" value="entertained"/>
                       <label for="test7">I want to be entertained</label>
                       </p>
                     </form>
@@ -46,15 +46,15 @@
                    <div class="collapsible-body">
                      <form class="timeAvailable" action="#" method="post">
                        <p>
-                       <input type="checkbox" id="test8" value="two"/>
+                       <input type="radio" name="act" id="test8" class="choice" value="two"/>
                        <label for="test8">I have 2 hours</label>
                        </p>
                        <p>
-                       <input type="checkbox" id="test9" value="four"/>
+                       <input type="radio" name="act" id="test9" class="choice" value="four"/>
                        <label for="test9">I have 4 hours</label>
                        </p>
                        <p>
-                       <input type="checkbox" id="test10" value="five"/>
+                       <input type="radio" name="act" id="test10" class="choice" value="five"/>
                        <label for="test10">I have more than 5 hours</label>
                        </p>
                      </form></div>
@@ -64,21 +64,21 @@
                    <div class="collapsible-body">
                      <form class="transportation" action="#" method="post">
                      <p>
-                     <input type="checkbox" id="test11" value="car"/>
+                     <input type="radio" name="action" id="test11" class="choice" value="car"/>
                      <label for="test11">By Car</label>
                      </p>
                      <p>
-                     <input type="checkbox" id="test12" value="walk"/>
+                     <input type="radio" name="action" id="test12" class="choice" value="walk"/>
                      <label for="test12">On Foot</label>
                      </p>
                      <p>
-                     <input type="checkbox" id="test13" value="bicycle"/>
+                     <input type="radio" name="action" id="test13" class="choice" value="bicycle"/>
                      <label for="test13">On a Bicycle</label>
                      </p>
                    </form></div>
                  </li>
 
-                 <button class="submit btn waves-effect waves-light" type="submit" name="action">Submit</button>
+                 <button class="submit btn waves-effect waves-light" type="submit" name="actionSubmit">Submit</button>
                  </ul>
 
               </ul>
@@ -99,8 +99,13 @@
                 <div id="gmaps-app">
 
                 </div>
+              <div id="info-card" class="card horizontal" v-show="ok">
+                <div class="card-content" id="card-image">
+                 <span v-for"item in placePhotos">
 
-                <div id="place-details">
+                 </span>
+               </div>
+                <div class="card-content" id="place-details">
                     <ol>
                         <todo-item
                             v-for="item in placeDetails"
@@ -108,6 +113,9 @@
                             v-bind:key="item.id">
                         </todo-item>
                     </ol>
+                  <button v-on:click="addDest">Add Destination</button>
+                </div>
+
                 </div>
 
                 <div id="total-distance">
@@ -123,7 +131,9 @@
 
         </div>
 
-
+        <div id="myplaces">
+          <ul id="destination"></ul>
+        </div>
         <div id="add-destination">
             <button v-on:click="addDest">Add Destination</button>
             <button v-on:click="getPOI">Start Trip</button>
