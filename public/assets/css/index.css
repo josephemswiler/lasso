@@ -57,8 +57,12 @@ height: auto;
 .auth-container, 
 .profile-container {
 	text-align: center;
+<<<<<<< HEAD
+	display: none;
+=======
 	width: 70%;
 	
+>>>>>>> 3877cbf21c1d52d60bb0b72802cc331668144dd7
 }
 
 .profile-img{
