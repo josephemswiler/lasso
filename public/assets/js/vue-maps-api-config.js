@@ -96,11 +96,6 @@ function gmapsCallback(){
 console.log(app)
 console.log("Address: ", app.placeDetails)
 
-Vue.component('todo-item', {
-    props: ['detail'],
-    template: '<li>{{ detail.text }}</li>'
-});
-  
 let placeDetailsApp = new Vue({
     el: '#place-details',
     data: {
@@ -110,9 +105,8 @@ let placeDetailsApp = new Vue({
             { id: 2, text: "" }, // phone number
             { id: 3, text: "" }, // rating
             { id: 4, text: "" }, // website
-            { id: 5, text: "" }, // photo
-            // { id: 6, text: "" }, // hours
-        ]
+            { id: 5, text: "" } // photo
+        ],
     },
     methods: {
         showPlaceDetails(place) {
@@ -121,9 +115,7 @@ let placeDetailsApp = new Vue({
             this.placeDetails[2].text = place.formatted_phone_number;
             this.placeDetails[3].text = place.rating;
             this.placeDetails[4].text = place.website;
-            this.placeDetails[5].text = "<img src='" + app.placeDetails.photos[0].getUrl({maxWidth: 1000, maxHeight: 1000}) + "' alt='Photo'"
-            
-            // this.placeDetails[6].text = place.opening_hours;
+            this.placeDetails[5].src = place.photos[0].getUrl({maxWidth : 100, maxHeight : 100});
         }
     }
 })
