@@ -16,7 +16,7 @@
     let emailKey = "";
 
 
-    //combine profile page and sign out page, add places from google api to firebase, add lazy load of places on profile page
+    //add close button functionality, load current favorite places to page, load added places to places, add places from google api to firebase, add lazy load of places on profile page
 
     //   let placeList = addDestination.waypoints;
 
@@ -36,17 +36,14 @@
 
         firebase.auth().signInWithPopup(provider).then(function (result) {
 
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          var token = result.credential.accessToken;
-          // The signed-in user info.
-          var user = result.user;
-    
-          let name = user.email.substr(0, user.email.indexOf('@'));
-    
-          currentUserName = name;
-          console.log(currentUserName);
-          
-          addUser(currentUserName);
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            var token = result.credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
+
+            let name = user.email.substr(0, user.email.indexOf('@'));
+
+            currentUserName = name;
 
         }).catch(function (error) {
             // Handle Errors here.
@@ -87,6 +84,54 @@
         }
     }
 
+    function favBtns() {
+
+        emailKey = localUser.email.substr(0, localUser.email.indexOf('@'));
+
+        database.ref('users/' + emailKey + '/favoritePlaces/').off("value")
+        database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) {
+
+            snap.forEach(function (data) {
+
+                database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).off("value")
+                database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
+                    if (currentFavorites.includes(snap.val())) {} else {
+                        currentFavorites.push(snap.val())
+                    }
+                });
+            });
+        });
+
+        for (var i = 0; i < currentFavorites.length; i++) {
+
+            console.log(currentFavorites[i])
+
+            let div = $('<div>')
+                .addClass('container-fluid poi-div')
+            let anchor = $('<a>')
+                .addClass('waves-effect waves-light grey lighten-4 grey-text text-darken-1 btn-large poi-anchor')
+            let close = $('<i>')
+                .addClass('material-icons right')
+                .text('close')
+            let star = $('<i>')
+                .addClass('material-icons left deep-orange-text text-lighten-1 fav-star')
+                .text('star')
+            let place = $('<i>')
+                .addClass('material-icons left cyan-text text-lighten-1')
+                .text('place')
+            let p = $('<p>')
+                .addClass('left')
+                .text(currentFavorites[i])
+
+            anchor.append(close).append(star).append(place).append(p)
+
+            div.append(anchor)
+
+            $('.poi-collection').append(div)
+
+        }
+    }
+
     //Sign out of current login
     $('.signout').click(function () {
 
@@ -120,6 +165,8 @@
 
             userSetup(user)
 
+            favBtns();
+
             // console.log(currentFavorites)
 
             emailKey = user.email.substr(0, user.email.indexOf('@'));
@@ -145,7 +192,8 @@
         }
     }); //listen for state change
 
-    $('.fav-star').click(function () { //in click handler .off() bound
+    $(document).on('click', '.fav-star', function () {
+
 
         let text = ($(this).parent().find('p').text());
 
@@ -187,25 +235,24 @@
 
             currentFavorites.splice(currentFavorites.indexOf(text), 1);
 
-                database.ref('users/' + emailKey + '/favoritePlaces/').off("value")
-                database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) { //here
-                    // console.log(snap.val());
-                    snap.forEach(function (data) {
-                        // console.log(data.key);
-    
-                        database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).off("value")
-                        database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
-    
-                            if (text === (snap.val())) {
-    
-                                database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).remove();
+            database.ref('users/' + emailKey + '/favoritePlaces/').off("value")
+            database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) { //here
+                // console.log(snap.val());
+                snap.forEach(function (data) {
+                    // console.log(data.key);
 
-                            } else {
-                            }
-                        });
+                    database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).off("value")
+                    database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
+
+                        if (text === (snap.val())) {
+
+                            database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).remove();
+
+                        } else {}
                     });
                 });
-        } 
+            });
+        }
     })
 
     // $(document).on('click', '.fav-star', function () {
