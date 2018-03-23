@@ -24,31 +24,6 @@
             <a href="#" class="brand-logo lime-text text-accent-1">
                 <h1>Lasso</h1>
             </a>
-            <!-- <a href="#" data-activates="mobile-demo" class="button-collapse">
-                <i class="material-icons">menu</i>
-            </a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li>
-                    <a href="sass.html">Sass</a>
-                </li>
-                <li>
-                    <a href="badges.html">Components</a>
-                </li>
-                <li>
-                    <a href="collapsible.html">JavaScript</a>
-                </li>
-            </ul>
-            <ul class="side-nav" id="mobile-demo">
-                <li>
-                    <a href="sass.html">Sass</a>
-                </li>
-                <li>
-                    <a href="badges.html">Components</a>
-                </li>
-                <li>
-                    <a href="collapsible.html">JavaScript</a>
-                </li>
-            </ul> -->
         </div>
         <div class="nav-content">
             <ul class="tabs tabs-transparent">
@@ -95,22 +70,6 @@
                     </form>
                 </div>
             <div class="poi-collection">
-                <!-- <div class="container-fluid poi-div">
-                    <a class="waves-effect waves-light grey lighten-4 grey-text text-darken-1 btn-large poi-anchor">
-                        <i class="material-icons right">close</i>
-                        <i class="material-icons left grey-text text-darken-1 fav-star">star_border</i>
-                        <i class="material-icons left cyan-text text-lighten-1">place</i>
-                        <p class="left">Cherrywood Coffeehouse</p>
-                    </a>
-                </div>
-                <div class="container-fluid poi-div">
-                    <a class="waves-effect waves-light grey lighten-4 grey-text text-darken-1 btn-large poi-anchor">
-                        <i class="material-icons right">close</i>
-                        <i class="material-icons left grey-text text-darken-1 fav-star">star_border</i>
-                        <i class="material-icons left cyan-text text-lighten-1">place</i>
-                        <p class="left">Lazarus Brewing Co.</p>
-                    </a>
-                </div> -->
             </div>
         </div>
     </div>
@@ -160,18 +119,16 @@
                     <div id="gmaps-app">
                     </div>
                     <div>
-
                         <div class="row" v-if="showButtons">
                             <div class="col s12 m7">
                                 <div class="card">
                                     <div id="place-details" v-if="markerClicked">
                                         <div class="card-image">
                                             <div v-for="item in placeDetails">
-                                                <img v-if="item.src" v-bind:src="item.src" alt="" />
+                                                <img class="clicked-place-img" v-if="item.src" v-bind:src="item.src" alt="" />
                                                 <!-- <span v-if="placeDetails" class="card-title">{{ placeDetails }}</span> -->
                                             </div>
                                         </div>
-                                    
                                         <div class="card-content">
                                             <ol>
                                                 <li v-for="item in placeDetails">
@@ -182,19 +139,15 @@
                                     </div>
                                 
                                     <div id="add-destination" v-if="showButtons">
-                                        <button v-on:click="addDest">Add Destination</button>
-                                        <button v-on:click="getPOI">Start Trip</button>
+                                        <a class="waves-effect waves-light blue-grey btn-large add-dest" v-on:click="addDest">Add Destination</a>
+                                        <a class="waves-effect waves-light blue-grey btn-large start-trip" v-on:click="getPOI">Start Trip</a>
                                     </div>
                                     <div id="google-maps-link" v-if="routeChosen">
-                                        <a v-bind:href="googleMapsBuiltLink">Open step-by-step navigation in Google Maps</a>
+                                        <a class="waves-effect waves-light lime accent-1 blue-grey-text btn-large" v-bind:href="googleMapsBuiltLink">Open in Google Maps</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                                            
-
-
-
                         <!-- <ol>
                             <li v-for="item in placeDetails">
                                 <span v-if="item.text">{{item.text}}</span>

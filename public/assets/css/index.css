@@ -66,6 +66,10 @@ body {
 	max-height: 300px;
 }
 
+.clicked-place-img {
+	width: 300;
+}
+
 .profile-container {
 	text-align: center;
 	width: 70%;
