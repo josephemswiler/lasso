@@ -167,6 +167,15 @@
        $('.validate').val('');
     }
 
+
+    $(document).on('click', '.start-trip', function () {
+
+    });
+
+    $(document).on('click', '.add-dest', function () {
+        
+    });
+
     function loadPlaces() { //here
         
         let arr = [];
