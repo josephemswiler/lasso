@@ -222,13 +222,42 @@
                     <div id="gmaps-app">
                     </div>
                     <div id="place-details">
-                        <ol>
+
+                            <div class="row">
+                                <div class="col s12 m7">
+                                    <div class="card">
+                                    <div class="card-image">
+                                        <div v-for="item in placeDetails">
+                                            <img v-if="item.src" v-bind:src="item.src" alt="" />
+                                            <!-- <span v-if="placeDetails" class="card-title">{{ placeDetails }}</span> -->
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="card-content">
+                                        <ol>
+                                            <li v-for="item in placeDetails">
+                                                <span v-if="item.text">{{item.text}}</span>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                    <div id="add-destination">
+                                        <button v-on:click="addDest">Add Destination</button>
+                                        <button v-on:click="getPOI">Start Trip</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                                            
+
+
+
+                        <!-- <ol>
                             <li v-for="item in placeDetails">
                                 <span v-if="item.text">{{item.text}}</span>
                                 <img v-if="item.src" v-bind:src="item.src" alt="" />
                             </li>
                         </ol>
-                    </div>
+                    </div> -->
                     <div id="total-distance">
                         {{ totalDistance }}
                     </div>
@@ -238,7 +267,7 @@
                     <span class="flow-text"></span>
                 </div>
             </div>
-            <div id="add-destination">
+            <!-- <div id="add-destination">
                 <button v-on:click="addDest">Add Destination</button>
                 <button v-on:click="getPOI">Start Trip</button>
             </div>
@@ -251,7 +280,7 @@
                     <a class="waves-effect waves-light btn-large">
                         <i class="material-icons left">cloud</i>button</a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <!-- Trip Section -->
