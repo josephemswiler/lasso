@@ -120,6 +120,8 @@
 
             userSetup(user)
 
+            // console.log(currentFavorites)
+
             emailKey = user.email.substr(0, user.email.indexOf('@'));
 
             database.ref('users/' + emailKey).update({
@@ -143,8 +145,12 @@
         }
     }); //listen for state change
 
-    $('.fav-star').click(function () {
+    $('.fav-star').click(function () { //in click handler .off() bound
+
+        let text = ($(this).parent().find('p').text());
+
         if ($(this).hasClass('grey-text')) {
+
             $(this)
                 .removeClass('grey-text text-darken-1')
                 .addClass('deep-orange-text text-lighten-1')
@@ -152,10 +158,12 @@
 
             emailKey = localUser.email.substr(0, localUser.email.indexOf('@'));
 
+            database.ref('users/' + emailKey + '/favoritePlaces/').off("value")
             database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) {
 
                 snap.forEach(function (data) {
 
+                    database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).off("value")
                     database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
                         if (currentFavorites.includes(snap.val())) {} else {
                             currentFavorites.push(snap.val())
@@ -164,48 +172,40 @@
                 });
             });
 
-            console.log(currentFavorites)
-
-            if (currentFavorites.includes($(this).parent().find('p').text())) {
+            if (currentFavorites.includes(text)) {
 
             } else {
 
-                database.ref('users/' + emailKey + '/favoritePlaces/').push($(this).parent().find('p').text())
-
+                database.ref('users/' + emailKey + '/favoritePlaces/').push(text)
             }
-
         } else {
+
             $(this)
                 .removeClass('deep-orange-text text-lighten-1')
                 .addClass('grey-text text-darken-1')
                 .text('star_border')
 
-            database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) {
-                // console.log(snap.val());
-                snap.forEach(function (data) {
-                    // console.log(data.key);
+            currentFavorites.splice(currentFavorites.indexOf(text), 1);
 
-                    database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
+                database.ref('users/' + emailKey + '/favoritePlaces/').off("value")
+                database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) { //here
+                    // console.log(snap.val());
+                    snap.forEach(function (data) {
+                        // console.log(data.key);
+    
+                        database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).off("value")
+                        database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
+    
+                            if (text === (snap.val())) {
+    
+                                database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).remove();
 
-                        console.log(($(this).parent().find('p').text())) //here
-
-                        if (($(this).parent().find('p').text()) === (snap.val())) {
-
-                            database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).remove();
-
-                            currentFavorites.splice(currentFavorites.indexOf($(this).parent().find('p').text()), 1)
-
-                        } else {
-
-                        }
+                            } else {
+                            }
+                        });
                     });
                 });
-            });
-
-
-
-
-        }
+        } 
     })
 
     // $(document).on('click', '.fav-star', function () {
