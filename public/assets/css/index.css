@@ -1,3 +1,7 @@
+
+
+@import url('https://fonts.googleapis.com/css?family=Mrs+Sheppards');
+
 html, body{
 	height: 100%;
 	margin: 0;
@@ -12,7 +16,13 @@ height: auto;
 
 }
 
-
+.brand-logo{
+	font-family: 'Mrs Sheppards', cursive;
+	margin-top: -10px;
+}
+.nav-wrapper {
+	margin-bottom: 15px;
+}
 .responsive-img{
 
 width: 100%;
@@ -21,6 +31,15 @@ height: auto;
 
 }
 
+.btn-small{
+	text-align: center;
+	font-size: 12pt;
+	background-color: #26c6da
+}
+
+.material-icons{
+	margin-left: 5px;
+}
 
 .btn-large{
 
@@ -33,9 +52,18 @@ height: auto;
 	background-color: grey;
 }
 
+.card{
+	width: 100%;
+	margin: 5px;
+}
+
+.card-image{
+	width: 50%;
+}
+
 #place-details{
 	width: 100%;
-	height: 90%;
+	height: 100%;
 }
 
 .collapsible-header{
@@ -47,7 +75,45 @@ height: auto;
 .collapsible-body p{
 	padding-left:10px;
 }
-.card{
-	width: 30%;
-	height: 100%;
+
+.auth-container {
+	text-align: center;
+	width: 70%;
+	max-height: 300px;
 }
+
+.profile-container {
+	text-align: center;
+	width: 70%;
+}
+
+.profile-img {
+	max-width: 300px;
+	margin: 0 auto;
+}
+
+.profile-name {
+	background: rgba(255,255,255,.75)
+}
+
+.nav-extended {
+	text-align: center;
+}
+
+.auth-btns a {
+	width: 80%;
+}
+
+.poi-collection a {
+	width: 100%;
+}
+
+.poi-div {
+	margin-top: 20px;
+}
+
+@media(max-width: 600px) {
+	.material-icons {
+	display: none;
+	}
+	}
