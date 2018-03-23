@@ -223,8 +223,10 @@
                     </div>
                     <div id="place-details">
                         <ol>
-                            <todo-item v-for="item in placeDetails" v-bind:detail="item" v-bind:key="item.id">
-                            </todo-item>
+                            <li v-for="item in placeDetails">
+                                <span v-if="item.text">{{item.text}}</span>
+                                <img v-if="item.src" v-bind:src="item.src" alt="" />
+                            </li>
                         </ol>
                     </div>
                     <div id="total-distance">
