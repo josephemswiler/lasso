@@ -13,10 +13,21 @@
     let database = firebase.database();
     let localUser = new Object();
     let currentFavorites = [];
+    let emailKey = "";
+
 
     //combine profile page and sign out page, add places from google api to firebase, add lazy load of places on profile page
 
     //   let placeList = addDestination.waypoints;
+
+    // database.ref().child('users').orderByChild('name').on("value", function(snapshot) {
+    //     console.log(snapshot.val());
+    //     snapshot.forEach(function(data) {
+    //         savedProfile.name = data.name;
+    //         savedProfile.key = data.key;
+    //         console.log(data.name);
+    //     });
+    // });
 
     //Google login
     $('.google-login').click(function () {
@@ -54,10 +65,12 @@
 
         $('.profile-name').text(currentUser.displayName);
 
-        database.ref('users/' + currentUser.G).on('value', function (snap) {
+        emailKey = currentUser.email.substr(0, currentUser.email.indexOf('@'));
+
+        database.ref('users/' + emailKey).on('value', function (snap) {
             let data = snap.val()
             if (!data) {
-                database.ref('users/' + currentUser.G).set({
+                database.ref('users/' + emailKey).set({
                     name: currentUser.displayName,
                     isActive: false,
                     authenticated: false
@@ -68,7 +81,7 @@
         localUser = JSON.parse(localStorage.getItem('firebase:authUser:' + currentUser.G + ':[DEFAULT]'));
 
         if (currentUser.G) {
-            database.ref('users/' + currentUser.G).onDisconnect().update({
+            database.ref('users/' + emailKey).onDisconnect().update({
                 isActive: false
             })
         }
@@ -77,13 +90,14 @@
     //Sign out of current login
     $('.signout').click(function () {
 
+        emailKey = localUser.email.substr(0, localUser.email.indexOf('@'));
+
         firebase.auth().signOut().then(function () {
 
-            database.ref('users/' + localUser.apiKey).update({
+            database.ref('users/' + emailKey).update({
                 isActive: false,
                 authenticated: false
             })
-
         }).catch(function (error) {
             // An error happened.
         });
@@ -106,7 +120,9 @@
 
             userSetup(user)
 
-            database.ref('users/' + user.G).update({
+            emailKey = user.email.substr(0, user.email.indexOf('@'));
+
+            database.ref('users/' + emailKey).update({
                 isActive: true,
                 authenticated: true
             })
@@ -134,12 +150,13 @@
                 .addClass('deep-orange-text text-lighten-1')
                 .text('star')
 
+            emailKey = localUser.email.substr(0, localUser.email.indexOf('@'));
 
-            database.ref('users/' + localUser.apiKey + '/favoritePlaces/').on("value", function (snap) {
+            database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) {
 
                 snap.forEach(function (data) {
 
-                    database.ref('users/' + localUser.apiKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
+                    database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
                         if (currentFavorites.includes(snap.val())) {} else {
                             currentFavorites.push(snap.val())
                         }
@@ -153,7 +170,7 @@
 
             } else {
 
-                database.ref('users/' + localUser.apiKey + '/favoritePlaces/').push($(this).parent().find('p').text())
+                database.ref('users/' + emailKey + '/favoritePlaces/').push($(this).parent().find('p').text())
 
             }
 
@@ -163,29 +180,29 @@
                 .addClass('grey-text text-darken-1')
                 .text('star_border')
 
-                database.ref('users/' + localUser.apiKey + '/favoritePlaces/').on("value", function (snap) {
-                    // console.log(snap.val());
-                    snap.forEach(function (data) {
-                        // console.log(data.key);
-    
-                        database.ref('users/' + localUser.apiKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
+            database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) {
+                // console.log(snap.val());
+                snap.forEach(function (data) {
+                    // console.log(data.key);
 
-                            console.log(($(this).parent().find('p').text())) //here
+                    database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
 
-                            if (($(this).parent().find('p').text()) === (snap.val())) {
-                                
-                                database.ref('users/' + localUser.apiKey + '/favoritePlaces/' + data.key).remove();
+                        console.log(($(this).parent().find('p').text())) //here
 
-                                currentFavorites.splice(currentFavorites.indexOf($(this).parent().find('p').text()),1)
+                        if (($(this).parent().find('p').text()) === (snap.val())) {
 
-                            } else {
-                                
-                            }
-                        });
+                            database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).remove();
+
+                            currentFavorites.splice(currentFavorites.indexOf($(this).parent().find('p').text()), 1)
+
+                        } else {
+
+                        }
                     });
                 });
+            });
 
-            
+
 
 
         }
