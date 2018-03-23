@@ -115,7 +115,7 @@ let placeDetailsApp = new Vue({
             this.placeDetails[2].text = place.formatted_phone_number;
             this.placeDetails[3].text = place.rating;
             this.placeDetails[4].text = place.website;
-            this.placeDetails[5].src = place.photos[0].getUrl({maxWidth : 100, maxHeight : 100});
+            this.placeDetails[5].src = place.photos ? place.photos[0].getUrl({maxWidth : 300, maxHeight : 300}) : null;
         }
     }
 })
