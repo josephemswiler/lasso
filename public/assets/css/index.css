@@ -17,6 +17,9 @@ height: auto;
 
 .brand-logo{
 	font-family: 'Mrs Sheppards', cursive;
+	margin-top: -10px;
+}
+.nav-wrapper {
 	margin-bottom: 15px;
 }
 .responsive-img{
@@ -54,19 +57,24 @@ height: auto;
 	padding-left:10px;
 }
 
-.auth-container, 
-.profile-container {
+.auth-container {
 	text-align: center;
-<<<<<<< HEAD
-	display: none;
-=======
 	width: 70%;
-	
->>>>>>> 3877cbf21c1d52d60bb0b72802cc331668144dd7
+	max-height: 300px;
 }
 
-.profile-img{
+.profile-container {
+	text-align: center;
+	width: 70%;
+}
+
+.profile-img {
 	max-width: 300px;
+	margin: 0 auto;
+}
+
+.profile-name {
+	background: rgba(255,255,255,.75)
 }
 
 .nav-extended {
@@ -84,3 +92,9 @@ height: auto;
 .poi-div {
 	margin-top: 20px;
 }
+
+@media(max-width: 600px) {
+	.material-icons {
+	display: none;
+	}
+	}
