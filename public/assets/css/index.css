@@ -42,8 +42,17 @@ height: auto;
 	background-color: grey;
 }
 
+.card{
+	width: 100%;
+	margin: 5px;
+}
+
+.card-image{
+	width: 50%;
+}
+
 #place-details{
-	width: 30%;
+	width: 100%;
 	height: 100%;
 }
 
