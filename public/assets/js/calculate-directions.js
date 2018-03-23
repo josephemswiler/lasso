@@ -4,6 +4,7 @@ let addDestination = new Vue({
         waypoints: [],
         totalDistance: 0,
         routeResult: {},
+        showButtons: false,
     },
     methods: {
         addDest: function (placeId) {
@@ -38,6 +39,7 @@ let addDestination = new Vue({
                     console.log("Directions results: ", result)
                     addDestination.routeResult = result;
                     computeTotalDistance.computeTotalDistance(result);
+                    googleMapsLink.routeChosen = true;
                     googleMapsLink.buildMapsLink();
                 }
             });
@@ -74,6 +76,7 @@ let googleMapsLink = new Vue({
         addedWaypoints: "&waypoints=",
         addedWaypointPlaceIds: "&waypoint_place_ids=",
         googleMapsBuiltLink: "https://www.google.com/maps/dir/?api=1&origin=",
+        routeChosen: false,
     },
     methods: {
         buildMapsLink() {

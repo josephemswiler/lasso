@@ -219,32 +219,38 @@
                 <div class="col s12">
                     <div id="gmaps-app">
                     </div>
-                    <div id="place-details">
+                    <div>
 
-                            <div class="row">
-                                <div class="col s12 m7">
-                                    <div class="card">
-                                    <div class="card-image">
-                                        <div v-for="item in placeDetails">
-                                            <img v-if="item.src" v-bind:src="item.src" alt="" />
-                                            <!-- <span v-if="placeDetails" class="card-title">{{ placeDetails }}</span> -->
+                        <div class="row" v-if="showButtons">
+                            <div class="col s12 m7">
+                                <div class="card">
+                                    <div id="place-details" v-if="markerClicked">
+                                        <div class="card-image">
+                                            <div v-for="item in placeDetails">
+                                                <img v-if="item.src" v-bind:src="item.src" alt="" />
+                                                <!-- <span v-if="placeDetails" class="card-title">{{ placeDetails }}</span> -->
+                                            </div>
                                         </div>
-                                        
+                                    
+                                        <div class="card-content">
+                                            <ol>
+                                                <li v-for="item in placeDetails">
+                                                    <span v-if="item.text">{{item.text}}</span>
+                                                </li>
+                                            </ol>
+                                        </div>
                                     </div>
-                                    <div class="card-content">
-                                        <ol>
-                                            <li v-for="item in placeDetails">
-                                                <span v-if="item.text">{{item.text}}</span>
-                                            </li>
-                                        </ol>
-                                    </div>
-                                    <div id="add-destination">
+                                
+                                    <div id="add-destination" v-if="showButtons">
                                         <button v-on:click="addDest">Add Destination</button>
                                         <button v-on:click="getPOI">Start Trip</button>
                                     </div>
+                                    <div id="google-maps-link" v-if="routeChosen">
+                                        <a v-bind:href="googleMapsBuiltLink">Open step-by-step navigation in Google Maps</a>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                                             
 
 
@@ -259,17 +265,17 @@
                     <div id="total-distance">
                         {{ totalDistance }}
                     </div>
-                    <div id="google-maps-link">
+                    <!-- <div id="google-maps-link">
                         <a v-bind:href="googleMapsBuiltLink">Open step-by-step navigation in Google Maps</a>
-                    </div>
+                    </div> -->
                     <span class="flow-text"></span>
                 </div>
             </div>
             <!-- <div id="add-destination">
                 <button v-on:click="addDest">Add Destination</button>
                 <button v-on:click="getPOI">Start Trip</button>
-            </div>
-            <div class="row">
+            </div> -->
+            <!-- <div class="row">
                 <div class="col s12">
                     <a class="waves-effect waves-light btn-large">
                         <i class="material-icons left">cloud</i>Button</a>
