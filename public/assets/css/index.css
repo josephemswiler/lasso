@@ -44,11 +44,10 @@ height: auto;
 
 .card{
 	width: 100%;
-	margin: 5px;
 }
 
 .card-image{
-	width: 50%;
+	max-width: 100%;
 }
 
 #place-details{
