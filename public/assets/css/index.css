@@ -39,13 +39,8 @@ body {
 	width: 100%;
 }
 
-<<<<<<< HEAD
-.card-image {
-	width: 50%;
-=======
 .card-image{
 	max-width: 100%;
->>>>>>> db90b63a86391ca04e5ad41a7b1837ee83d0168b
 }
 
 #place-details {
