@@ -15,18 +15,9 @@
     let currentFavorites = [];
     let emailKey = "";
 
-    //add close button functionality, load current favorite places to page, load added places to places, add places from google api to firebase, add lazy load of places on profile page
+    // load added places to places, add places from google api to firebase
 
     //   let placeList = addDestination.waypoints;
-
-    // database.ref().child('users').orderByChild('name').on("value", function(snapshot) {
-    //     console.log(snapshot.val());
-    //     snapshot.forEach(function(data) {
-    //         savedProfile.name = data.name;
-    //         savedProfile.key = data.key;
-    //         console.log(data.name);
-    //     });
-    // });
 
     //Google login
     $('.google-login').click(function () {
@@ -108,8 +99,6 @@
 
         for (var i = 0; i < currentFavorites.length; i++) {
 
-            console.log(currentFavorites[i])
-
             let div = $('<div>')
                 .addClass('container-fluid poi-div')
             let anchor = $('<a>')
@@ -178,6 +167,39 @@
        $('.validate').val('');
     }
 
+    function loadPlaces() { //here
+        
+        let arr = [];
+
+        for (var i = 0; i < arr.length; i++) {
+
+            let div = $('<div>')
+                .addClass('container-fluid poi-div')
+            let anchor = $('<a>')
+                .addClass('waves-effect waves-light grey lighten-4 grey-text text-darken-1 btn-large poi-anchor')
+            let close = $('<i>')
+                .addClass('material-icons close right')
+                .text('close')
+            let star = $('<i>')
+                .addClass('material-icons left grey-text text-darken-1 fav-star')
+                .text('star_border')
+            let place = $('<i>')
+                .addClass('material-icons left place-marker cyan-text text-lighten-1')
+                .text('place')
+            let p = $('<p>')
+                .addClass('left')
+                .text(currentFavorites[i])
+
+            anchor.append(close).append(star).append(place).append(p)
+
+            div.append(anchor)
+
+            $('.poi-collection').append(div)
+
+        }
+
+    }
+
     $('.add-form').submit(function( event ) {
 
         event.preventDefault();
@@ -223,11 +245,9 @@
             $('.profile-tab').removeClass('disabled')
             $('.auth-tab a').removeClass('active').text('Sign Out')
 
-            userSetup(user)
+            userSetup(user);
 
-            favBtns()
-
-            // console.log(currentFavorites)
+            favBtns();
 
             emailKey = user.email.substr(0, user.email.indexOf('@'));
 
@@ -295,10 +315,9 @@
             currentFavorites.splice(currentFavorites.indexOf(text), 1);
 
             database.ref('users/' + emailKey + '/favoritePlaces/').off("value")
-            database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) { //here
-                // console.log(snap.val());
+            database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) {
+
                 snap.forEach(function (data) {
-                    // console.log(data.key);
 
                     database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).off("value")
                     database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
@@ -316,8 +335,6 @@
 
     $(document).on('click', '.close', function () {
 
-        console.log('yep')
-
         let text = ($(this).parent().find('p').text());
 
         emailKey = localUser.email.substr(0, localUser.email.indexOf('@'));
@@ -325,10 +342,9 @@
         currentFavorites.splice(currentFavorites.indexOf(text), 1);
 
         database.ref('users/' + emailKey + '/favoritePlaces/').off("value")
-        database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) { //here
-            // console.log(snap.val());
+        database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) { 
+
             snap.forEach(function (data) {
-                // console.log(data.key);
 
                 database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).off("value")
                 database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
@@ -343,24 +359,4 @@
         });
         $(this).parent().remove();
     });
-
-    // $(document).on('click', '.fav-star', function () {
-
-    //     //firebase delete
-    //     database.ref("users/" + tupleList[currentIndex].userKey).remove(); 
-
-    //     //local delete
-
-    //     tupleList.splice(currentIndex, 1);
-
-    //     savedNames.splice(currentIndex, 1); 
-
-    //     savedUsers = tupleList;
-
-    //     localStorage.setItem('localUsers', JSON.stringify(savedUsers));
-
-    //     $(this).parent().remove();
-
-    //     location.reload();
-    // });
 })()
