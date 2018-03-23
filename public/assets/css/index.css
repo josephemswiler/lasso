@@ -37,11 +37,15 @@ body {
 
 .card {
 	width: 100%;
-	margin: 5px;
 }
 
+<<<<<<< HEAD
 .card-image {
 	width: 50%;
+=======
+.card-image{
+	max-width: 100%;
+>>>>>>> db90b63a86391ca04e5ad41a7b1837ee83d0168b
 }
 
 #place-details {
