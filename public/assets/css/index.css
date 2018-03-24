@@ -35,6 +35,10 @@ body {
 	background-color: grey;
 }
 
+.card-display {
+	margin-top: 15px;
+}
+
 
 .open-gmaps, .add-dest, .start-trip {
 	margin-bottom: 15px;
