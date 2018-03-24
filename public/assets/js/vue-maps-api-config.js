@@ -73,14 +73,9 @@ let app = new Vue({
                 };
                 app._data.service.getDetails(request, function (place, status) {
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        // console.log(place, request);
-                        passedName = place.name;
-                        // console.log(place.name)
                         app.placeDetails = place;
                         app.currentPlace = request;
                         app.infoWindow.setContent('<div><strong>' + place.name + '</strong><br>');
-                        // 'Place ID: ' + place.place_id + '<br>' +
-                        // place.formatted_address + '</div>');
                         app.infoWindow.open(app.map, marker);
                         placeDetailsApp.showPlaceDetails(place);
                     }
@@ -101,8 +96,6 @@ let app = new Vue({
 function gmapsCallback(){
     app.initMap()
 }
-console.log(app)
-console.log("Address: ", app.placeDetails)
 
 let placeDetailsApp = new Vue({
     el: '#place-details',
