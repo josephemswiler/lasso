@@ -16,10 +16,6 @@
     let emailKey = "";
     let passedName = "";
 
-    //add places from google api to loadPlaces function
-
-    //   let placeList = addDestination.waypoints;
-
     //Google login
     $('.google-login').click(function () {
 
@@ -177,20 +173,18 @@
 
     $(document).on('click', '.add-dest', function () {
 
-        console.log($('ol:first-child span').first().text())
-
         loadPlaces($('ol:first-child span').first().text());
 
     });
 
-    function loadPlaces(btnText) { //here
+    function loadPlaces(btnText) {
 
         let div = $('<div>')
             .addClass('container-fluid poi-div')
         let anchor = $('<a>')
             .addClass('waves-effect waves-light grey lighten-4 grey-text text-darken-1 btn-large poi-anchor')
         let close = $('<i>')
-            .addClass('material-icons close right')
+            .addClass('material-icons right') //add .close for close function
             .text('close')
         let star = $('<i>')
             .addClass('material-icons left grey-text text-darken-1 fav-star new-star')
@@ -202,6 +196,13 @@
             .addClass('left')
             .text(btnText)
 
+        if(currentFavorites.includes(btnText)) {
+            star
+                .removeClass('grey-text text-darken-1')
+                .addClass('deep-orange-text text-lighten-1')
+                .text('star')
+        }
+        
         anchor.append(close).append(star).append(place).append(p)
 
         div.append(anchor)

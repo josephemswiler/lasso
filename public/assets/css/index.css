@@ -192,7 +192,7 @@ body {
 	margin-top: 15px;
 }
 
-.poi-anchor {
+.poi-anchor, .add-btn {
 	display: block;
 }
 
