@@ -74,7 +74,8 @@ let app = new Vue({
                 app._data.service.getDetails(request, function (place, status) {
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
                         // console.log(place, request);
-                        console.log(place.name)
+                        passedName = place.name;
+                        // console.log(place.name)
                         app.placeDetails = place;
                         app.currentPlace = request;
                         app.infoWindow.setContent('<div><strong>' + place.name + '</strong><br>');
@@ -118,11 +119,11 @@ let placeDetailsApp = new Vue({
     },
     methods: {
         showPlaceDetails(place) {
-            this.placeDetails[0].text = "Name: " + place.name;
-            this.placeDetails[1].text = "Address: " + place.formatted_address;
-            this.placeDetails[2].text = "Phone number: " + place.formatted_phone_number;
-            this.placeDetails[3].text = "Rating: " + place.rating;
-            this.placeDetails[4].text = "Website: " + place.website;
+            this.placeDetails[0].text = place.name;
+            // this.placeDetails[1].text = "Address: " + place.formatted_address;
+            // this.placeDetails[2].text = "Phone number: " + place.formatted_phone_number;
+            // this.placeDetails[3].text = "Rating: " + place.rating;
+            // this.placeDetails[4].text = "Website: " + place.website;
             this.placeDetails[5].src = place.photos ? place.photos[0].getUrl({maxWidth : 300, maxHeight : 300}) : null;
         }
     }
