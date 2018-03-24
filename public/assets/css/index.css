@@ -78,9 +78,10 @@ body {
 .dist {
 	display: none;
 	width: 100%;
+	margin: 0 auto;
 }
 
-.card-panel {
+.card-panel, .total-distance {
 	width: 100%;
 }
 .card {
@@ -117,6 +118,13 @@ body {
 .trip-container {
 	text-align: center;
 	margin: 0 auto;
+	width: 100%;
+}
+
+#trip {
+	text-align: center;
+	margin: 0 auto;
+	width: 100%;
 }
 
 .profile-container {
@@ -160,9 +168,15 @@ body {
 	text-align: center;
 }
 
+#gmaps-app {
+	margin-bottom: 15px;
+}
+
 .places-wrapper {
 	width: 70%;
-	margin-bottom: 15px;
+	text-align: center;
+	margin: 0 auto;
+
 }
 
 .add-row a {
