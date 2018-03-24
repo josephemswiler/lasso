@@ -35,6 +35,12 @@ body {
 	background-color: grey;
 }
 
+.open-gmaps {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	width: 100%;
+}
+
 .card {
 	width: 100%;
 }
