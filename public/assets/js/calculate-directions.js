@@ -22,7 +22,6 @@ let addDestination = new Vue({
         },
 
         calcRoute(directionsService, directionsDisplay) {
-            console.log("calcRoute being called")
             let start = app.pos;
             let end = app.pos;
             let request = {
@@ -33,10 +32,8 @@ let addDestination = new Vue({
                 travelMode: 'WALKING',
             };
             directionsService.route(request, function (result, status) {
-                console.log("This is the status: ", status);
                 if (status == 'OK') {
                     directionsDisplay.setDirections(result);
-                    console.log("Directions results: ", result)
                     addDestination.routeResult = result;
                     computeTotalDistance.computeTotalDistance(result);
                     googleMapsLink.routeChosen = true;
