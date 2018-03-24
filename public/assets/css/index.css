@@ -209,6 +209,11 @@ p {
 	overflow-wrap: break-word !important;
 }
 
+.inner-div {
+	width: auto;
+	margin: 0 auto;
+	text-align: center;
+}
 
 
 @media(max-width: 550px) {
