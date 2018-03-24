@@ -173,7 +173,7 @@
     });
 
     $(document).on('click', '.add-dest', function () {
-        
+
     });
 
     function loadPlaces() { //here
@@ -367,5 +367,11 @@
             });
         });
         $(this).parent().remove();
+    });
+
+    $(document).on('click', '.poi-anchor p', function () {
+        let favoriteLocation = encodeURIComponent($(this).text());
+        let googleMapsPlaceLink = "https://maps.google.com/?q=" + favoriteLocation;
+        window.open(googleMapsPlaceLink, '_blank');
     });
 })()
