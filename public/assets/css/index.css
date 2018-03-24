@@ -35,10 +35,10 @@ body {
 	background-color: grey;
 }
 
-.open-gmaps {
-	margin-top: 15px;
+
+.open-gmaps, .add-dest, .start-trip {
 	margin-bottom: 15px;
-	width: 100%;
+	width: 80%;
 }
 
 .card {
