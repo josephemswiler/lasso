@@ -65,7 +65,6 @@
                                 <p class="center">Add</p>
                             </a>
                         </div>
-
                 </form>
             </div>
             <div class="poi-collection">
@@ -116,7 +115,7 @@
             <div id="gmaps-app">
             </div>
             <div class="places-wrapper card-display" v-if="showButtons">
-                <div class="card">
+                <div class="card inner-div">
                     <div id="place-details" v-if="markerClicked">
                         <div class="card-image place-img-wrapper">
                             <div v-for="item in placeDetails">
@@ -182,42 +181,12 @@
                                 </div>
                             </span>
                         </div>
-
-                    </div>
-                </div>
-
-                <!-- <div id="google-maps-link">
-                        <a v-bind:href="googleMapsBuiltLink">Open step-by-step navigation in Google Maps</a>
-                    </div> -->
-                <span class="flow-text"></span>
-            </div>
-
-            <!-- <div id="add-destination">
-                <button v-on:click="addDest">Add Destination</button>
-                <button v-on:click="getPOI">Start Trip</button>
-            </div> -->
-            <!-- <div class="row">
-                <div class="col s12">
-                    <a class="waves-effect waves-light btn-large">
-                        <i class="material-icons left">cloud</i>Button</a>
-                    <a class="waves-effect waves-light btn-large">
-                        <i class="material-icons left">cloud</i>button</a>
-                    <a class="waves-effect waves-light btn-large">
-                        <i class="material-icons left">cloud</i>button</a>
-                </div>
-            </div> -->
-
-
-                    <!-- <div id="total-distance">
-                        {{ totalDistance }}
-                    </div> -->
                     <span class="flow-text"></span>
                 </div>
 
             </div>
         </div>
         <!-- Trip Section -->
-
 
 
             <!-- Trip Section -->
