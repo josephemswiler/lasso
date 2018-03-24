@@ -14,6 +14,7 @@
     let localUser = new Object();
     let currentFavorites = [];
     let emailKey = "";
+    let passedName = "";
 
     //add places from google api to loadPlaces function
 
@@ -164,57 +165,56 @@
 
         currentFavorites.push(input);
 
-       $('.validate').val('');
+        $('.validate').val('');
     }
 
 
     $(document).on('click', '.start-trip', function () {
-
+        $('.dist').css({
+            display: 'block'
+        })
     });
 
     $(document).on('click', '.add-dest', function () {
-        
+
+        console.log($('ol:first-child span').first().text())
+
+        loadPlaces($('ol:first-child span').first().text());
+
     });
 
-    function loadPlaces() { //here
-        
-        let arr = [];
+    function loadPlaces(btnText) { //here
 
-        for (var i = 0; i < arr.length; i++) {
+        let div = $('<div>')
+            .addClass('container-fluid poi-div')
+        let anchor = $('<a>')
+            .addClass('waves-effect waves-light grey lighten-4 grey-text text-darken-1 btn-large poi-anchor')
+        let close = $('<i>')
+            .addClass('material-icons close right')
+            .text('close')
+        let star = $('<i>')
+            .addClass('material-icons left grey-text text-darken-1 fav-star new-star')
+            .text('star_border')
+        let place = $('<i>')
+            .addClass('material-icons left place-marker cyan-text text-lighten-1')
+            .text('place')
+        let p = $('<p>')
+            .addClass('left')
+            .text(btnText)
 
-            let div = $('<div>')
-                .addClass('container-fluid poi-div')
-            let anchor = $('<a>')
-                .addClass('waves-effect waves-light grey lighten-4 grey-text text-darken-1 btn-large poi-anchor')
-            let close = $('<i>')
-                .addClass('material-icons close right')
-                .text('close')
-            let star = $('<i>')
-                .addClass('material-icons left grey-text text-darken-1 fav-star')
-                .text('star_border')
-            let place = $('<i>')
-                .addClass('material-icons left place-marker cyan-text text-lighten-1')
-                .text('place')
-            let p = $('<p>')
-                .addClass('left')
-                .text(currentFavorites[i])
+        anchor.append(close).append(star).append(place).append(p)
 
-            anchor.append(close).append(star).append(place).append(p)
+        div.append(anchor)
 
-            div.append(anchor)
-
-            $('.poi-collection').append(div)
-
-        }
-
+        $('.places-wrapper').append(div)
     }
 
-    $('.add-form').submit(function( event ) {
+    $('.add-form').submit(function (event) {
 
         event.preventDefault();
 
         newBtn();
-      });
+    });
 
     $('.add-btn').click(function (event) {
 
@@ -292,6 +292,13 @@
                 .addClass('deep-orange-text text-lighten-1')
                 .text('star')
 
+            if ($('.new-star').parent().find('p').text() === text) {
+                $('.new-star')
+                    .removeClass('grey-text text-darken-1')
+                    .addClass('deep-orange-text text-lighten-1')
+                    .text('star')
+            }
+
             emailKey = localUser.email.substr(0, localUser.email.indexOf('@'));
 
             database.ref('users/' + emailKey + '/favoritePlaces/').off("value")
@@ -320,6 +327,13 @@
                 .removeClass('deep-orange-text text-lighten-1')
                 .addClass('grey-text text-darken-1')
                 .text('star_border')
+
+            if ($('.new-star').parent().find('p').text() === text) {
+                $('.new-star')
+                    .removeClass('deep-orange-text text-lighten-1')
+                    .addClass('grey-text text-darken-1')
+                    .text('star_border')
+            }
 
             currentFavorites.splice(currentFavorites.indexOf(text), 1);
 
@@ -351,7 +365,7 @@
         currentFavorites.splice(currentFavorites.indexOf(text), 1);
 
         database.ref('users/' + emailKey + '/favoritePlaces/').off("value")
-        database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) { 
+        database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) {
 
             snap.forEach(function (data) {
 
