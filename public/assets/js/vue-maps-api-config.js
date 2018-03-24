@@ -73,7 +73,8 @@ let app = new Vue({
                 };
                 app._data.service.getDetails(request, function (place, status) {
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        console.log(place, request);
+                        // console.log(place, request);
+                        console.log(place.name)
                         app.placeDetails = place;
                         app.currentPlace = request;
                         app.infoWindow.setContent('<div><strong>' + place.name + '</strong><br>');
@@ -125,18 +126,4 @@ let placeDetailsApp = new Vue({
             this.placeDetails[5].src = place.photos ? place.photos[0].getUrl({maxWidth : 300, maxHeight : 300}) : null;
         }
     }
-})
-let placePhoto= new Vue({
-  el:"card-image",
-  data:{
-    placePhotos:[
-      {id:0},
-    ]
-
-  },
-  methods:{
-    showPlacePhoto(photo){
-      app.placeDetails.photos[0].getUrl({maxWidth: 35, maxHeight: 35});
-    }
-  }
 })

@@ -15,7 +15,7 @@
     let currentFavorites = [];
     let emailKey = "";
 
-    // load added places to places, add places from google api to firebase
+    //add places from google api to loadPlaces function
 
     //   let placeList = addDestination.waypoints;
 
@@ -166,6 +166,15 @@
 
        $('.validate').val('');
     }
+
+
+    $(document).on('click', '.start-trip', function () {
+
+    });
+
+    $(document).on('click', '.add-dest', function () {
+        
+    });
 
     function loadPlaces() { //here
 
