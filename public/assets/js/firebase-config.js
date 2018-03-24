@@ -368,4 +368,11 @@
         });
         $(this).parent().remove();
     });
+
+    $(document).on('click', '.poi-anchor p', function () {
+        let favoriteLocation = encodeURIComponent($(this).text());
+        let googleMapsPlaceLink = "https://maps.google.com/?q=" + favoriteLocation;
+        console.log(googleMapsPlaceLink);
+        window.open(googleMapsPlaceLink, '_blank');
+    });
 })()
