@@ -1,0 +1,8 @@
+(function () {
+
+    $(".button-collapse").sideNav();
+
+
+
+
+})()

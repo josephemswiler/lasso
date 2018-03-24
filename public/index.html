@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- reset css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <!-- Font Awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ"
+        crossorigin="anonymous"></script>
+    <!-- materialize css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <!-- local css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/index.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="nav-extended cyan lighten-1">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo lime-text text-accent-1">
+                <h1>Lasso</h1>
+            </a>
+        </div>
+        <div class="nav-content">
+            <ul class="tabs tabs-transparent">
+                <li class="tab profile-tab">
+                    <a class="profile-link" href="#profile">Profile</a>
+                </li>
+                <li class="tab trip-tab">
+                    <a href="#trip">Trip</a>
+                </li>
+                <li class="tab auth-tab">
+                    <a class="active" href="#auth">Sign In</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Navbar -->
+    <!-- Profile Section -->
+    <div id="profile" class="col s12">
+        <div class="container profile-container">
+            <div class="card">
+                <div class="card-image">
+                    <img class="profile-img" src="#">
+                    <div class="card-title profile-name blue-grey-text"></div>
+                </div>
+                <div class="card-content">
+                    <p class="blue-grey-text">Click the star to save your favorite places!</p>
+                </div>
+            </div>
+            <div class="row add-row">
+                <form class="add-form">
+                        <div class="input-field col s6">
+                            <i class="material-icons left grey-text text-darken-1 prefix">place</i>
+                            <input id="icon_prefix" type="text" class="validate">
+                            <label for="icon_prefix">Place</label>
+                        </div>
+                        <div class="col s6">
+                            <a class="waves-effect waves-light lime accent-1 blue-grey-text btn-large add-btn">
+                                <p class="center">Add</p>
+                            </a>
+                        </div>
+                </form>
+            </div>
+            <div class="poi-collection">
+            </div>
+        </div>
+    </div>
+    <!-- Profile Section -->
+    <!-- Auth Section -->
+    <div id="auth" class="col s12">
+        <div class="container auth-container">
+            <div class="card">
+                <div class="card-content blue-grey-text">
+                    <h5 class="auth-message">Sign in with your Google Account.</h5>
+                </div>
+                <div class="card-tabs">
+                    <ul class=" google-auth">
+                        <li class="tab">
+                            <a class="active cyan-text" href="#">GOOGLE AUTHENTICATION</a>
+                            <br/>
+                            <br/>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-content grey lighten-4">
+                    <div class="auth-btns">
+                        <h1>
+                            <i class="fab fa-google blue-grey-text"></i>
+                        </h1>
+                        <a class="waves-effect waves-light lime accent-1 blue-grey-text btn-large google-login">
+                            <i class="material-icons left">cloud</i>
+                            <span class="left">Sign In</span>
+                        </a>
+                        <a class="waves-effect waves-light blue-grey btn-large signout">
+                            <i class="material-icons left">cloud_off</i>
+                            <span class="left">Sign Out</span>
+                        </a>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Auth Section -->
+    <!-- Trip Section -->
+
+    <div id="trip" class="col s12">
+        <div class="container trip-container center-align">
+            <div id="gmaps-app">
+            </div>
+            <div class="places-wrapper card-display" v-if="showButtons">
+                <div class="card inner-div">
+                    <div id="place-details" v-if="markerClicked">
+                        <div class="card-image place-img-wrapper">
+                            <div v-for="item in placeDetails">
+                                <img class="clicked-place-img" v-if="item.src" v-bind:src="item.src" alt="" />
+                            </div>
+                            <div class="card-title blue-grey-text">
+                                <ol>
+                                    <li v-for="item in placeDetails">
+                                        <span v-if="item.text">{{item.text}}</span>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inner-btns" id="add-destination" v-if="showButtons">
+                        <a class="waves-effect waves-light blue-grey btn-large add-dest" v-on:click="addDest">Add Destination</a>
+                        <br>
+                        <a class="waves-effect waves-light blue-grey btn-large start-trip" v-on:click="getPOI">Start Trip</a>
+                    </div>
+                    <div class="inner-btns" id="google-maps-link" v-if="routeChosen">
+                        <a class="waves-effect waves-light lime accent-1 blue-grey-text btn-large open-gmaps" v-bind:href="googleMapsBuiltLink">Open in Google Maps</a>
+                    </div>
+                </div>
+                <div class="dist">
+                        <div class="card-panel">
+                            <span class="blue-grey-text">
+                                <div id="total-distance">
+                                    <h5>
+                                        {{ totalDistance }}
+                                    </h5>
+                                </div>
+                            </span>
+                        </div>
+                    <span class="flow-text"></span>
+            </div>
+        </div>
+        <!-- Trip Section -->
+
+
+            <!-- Trip Section -->
+
+            <!--Import jQuery before materialize.js-->
+            <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+            <!-- Materialize -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+            <!-- Firebase -->
+            <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+
+            <!-- Local Firebase -->
+            <script type="text/javascript" src="assets/js/firebase-config.js"></script>
+
+            <!-- Vue JS -->
+            <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
+
+            <!-- This needs to be before the Google Maps API call -->
+            <script src="assets/js/calculate-directions.js"></script>
+            <script src="assets/js/vue-maps-api-config.js"></script>
+
+            <!-- Google Maps API call -->
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2IahrwPpyvfygnrvqEa_lP61ri9w3CxY&libraries=places&callback=gmapsCallback"
+                type="text/javascript"></script>
+
+            <!-- Local JS -->
+            <script type="text/javascript" src="assets/js/index.js"></script>
+
+</body>
+
+</html>

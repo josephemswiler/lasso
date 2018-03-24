@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css?family=Mrs+Sheppards');
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	width: 100%;
+	height: auto;
+}
+
+.brand-logo {
+	font-family: 'Mrs Sheppards', cursive;
+	margin-top: -10px;
+}
+
+.nav-wrapper {
+	margin-bottom: 15px;
+}
+
+.responsive-img {
+	width: 100%;
+	height: auto;
+}
+
+.btn-large {
+	width: 33.1%;
+}
+
+#gmaps-app {
+	width: 100%;
+	height: 400px;
+	background-color: grey;
+}
+
+#place-details {
+	margin-bottom: 15px;
+}
+
+.card-image {
+	margin-bottom: 15px;
+}
+
+.card-display {
+	margin: 15px;
+
+}
+
+.places-wrapper a {
+	width: 100%;
+}
+
+.open-gmaps, .add-dest, .start-trip {
+	margin-bottom: 15px;
+	width: 80%;
+}
+
+.place-img-wrapper {
+	width: 300px;
+	height: 300px;
+}
+
+.clicked-place-img {
+	width: 300px;
+	height: 300px;
+	object-fit: cover;
+}
+
+
+.this-center {
+	float: none;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.dist {
+	display: none;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.card-panel, .total-distance {
+	width: 100%;
+}
+.card {
+	width: 100%;
+}
+
+.card-image{
+	max-width: 100%;
+}
+
+#place-details {
+	width: 100%;
+	height: 100%;
+}
+
+.collapsible-header {
+	color: black;
+}
+
+.collapsible-body {
+	color: black;
+}
+
+.collapsible-body p {
+	padding-left: 10px;
+}
+
+.auth-container {
+	text-align: center;
+	width: 70%;
+	max-height: 300px;
+}
+
+.trip-container {
+	text-align: center;
+	margin: 0 auto;
+	width: 100%;
+}
+
+#trip {
+	text-align: center;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.profile-container {
+	text-align: center;
+	width: 70%;
+	margin: 0 auto;
+}
+
+.card,
+.card-image {
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.profile-img {
+	max-width: 300px;
+	margin: 0 auto;
+}
+
+.card-title {
+	background: rgba(255, 255, 255, .75)
+}
+
+.nav-extended {
+	text-align: center;
+	background-image: linear-gradient(to bottom, #576574, #587991, #528fae, #41a5ca, #0abde3) !important;
+}
+
+.auth-btns a {
+	width: 80%;
+}
+
+.poi-collection a {
+	width: 100%;
+}
+
+.inner-btns {
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#gmaps-app {
+	margin-bottom: 15px;
+}
+
+.places-wrapper {
+	width: 70%;
+	text-align: center;
+	margin: 0 auto;
+
+}
+
+.add-row a {
+	width: 100%;
+}
+
+.add-row {
+	margin-top: 20px;
+	margin-bottom: -20px;
+}
+
+.poi-div {
+	margin-top: 15px;
+}
+
+.poi-anchor, .add-btn {
+	display: block;
+}
+
+label::after {
+	color: #00bcd4;
+}
+
+.input-field input:focus+label {
+	color: #00bcd4 !important;
+}
+
+/* label underline focus color */
+
+.row .input-field input:focus {
+	border-bottom: 1px solid #00bcd4 !important;
+	box-shadow: 0 1px 0 0 #00bcd4 !important
+}
+
+.google-auth {
+	border-bottom: 1px solid #00bcd4 !important;
+	box-shadow: 0 1px 0 0 #00bcd4 !important
+}
+
+p {
+	white-space: nowrap !important;
+	overflow: hidden !important;
+	text-overflow: ellipsis !important;
+	overflow-wrap: break-word !important;
+}
+
+.inner-div {
+	width: auto;
+	margin: 0 auto;
+	text-align: center;
+}
+
+
+@media(max-width: 550px) {
+	.poi-div p {
+		font-size: 9px;
+	}
+	.place-marker {
+		display: none;
+	}
+}

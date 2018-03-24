@@ -1,0 +1,21 @@
+Google Maps:
+    Working: Autopopulate restaraunts
+            Add multiple locations
+            Start search and auto build string
+
+    To-do: build trip with multiple query types
+        drop-down to change query string types
+
+Firebase:
+    Working: Authentication
+    To-do: Figure out what data to store on the user profile
+            Create profile page to look at the data (list of places that you have been to, modify list, blacklist, star, etc)
+
+DOM:
+    Working: Card
+    To-do: Put place details into the Card 
+            Add photos
+
+Presentation:
+    To-do: Build powerpoint Presentation
+
