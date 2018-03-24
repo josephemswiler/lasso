@@ -15,19 +15,9 @@
     let currentFavorites = [];
     let emailKey = "";
 
-
-    //combine profile page and sign out page, add places from google api to firebase, add lazy load of places on profile page
+    // load added places to places, add places from google api to firebase
 
     //   let placeList = addDestination.waypoints;
-
-    // database.ref().child('users').orderByChild('name').on("value", function(snapshot) {
-    //     console.log(snapshot.val());
-    //     snapshot.forEach(function(data) {
-    //         savedProfile.name = data.name;
-    //         savedProfile.key = data.key;
-    //         console.log(data.name);
-    //     });
-    // });
 
     //Google login
     $('.google-login').click(function () {
@@ -36,17 +26,14 @@
 
         firebase.auth().signInWithPopup(provider).then(function (result) {
 
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          var token = result.credential.accessToken;
-          // The signed-in user info.
-          var user = result.user;
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            var token = result.credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
 
-          let name = user.email.substr(0, user.email.indexOf('@'));
+            let name = user.email.substr(0, user.email.indexOf('@'));
 
-          currentUserName = name;
-          console.log(currentUserName);
-
-          addUser(currentUserName);
+            currentUserName = name;
 
         }).catch(function (error) {
             // Handle Errors here.
@@ -87,6 +74,146 @@
         }
     }
 
+    function favBtns() {
+
+        $('.poi-collection').empty();
+
+        if (localUser.email) {
+
+            emailKey = localUser.email.substr(0, localUser.email.indexOf('@'));
+
+            database.ref('users/' + emailKey + '/favoritePlaces/').off("value")
+            database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) {
+
+                snap.forEach(function (data) {
+
+                    database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).off("value")
+                    database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
+                        if (currentFavorites.includes(snap.val())) {} else {
+                            currentFavorites.push(snap.val())
+                        }
+                    });
+                });
+            });
+        }
+
+        for (var i = 0; i < currentFavorites.length; i++) {
+
+            let div = $('<div>')
+                .addClass('container-fluid poi-div')
+            let anchor = $('<a>')
+                .addClass('waves-effect waves-light grey lighten-4 grey-text text-darken-1 btn-large poi-anchor')
+            let close = $('<i>')
+                .addClass('material-icons close right')
+                .text('close')
+            let star = $('<i>')
+                .addClass('material-icons left deep-orange-text text-lighten-1 fav-star')
+                .text('star')
+            let place = $('<i>')
+                .addClass('material-icons left place-marker cyan-text text-lighten-1')
+                .text('place')
+            let p = $('<p>')
+                .addClass('left')
+                .text(currentFavorites[i])
+
+            anchor.append(close).append(star).append(place).append(p)
+
+            div.append(anchor)
+
+            $('.poi-collection').append(div)
+
+        }
+    } //favBtns
+
+    $('.profile-link').click(function () {
+        favBtns();
+
+    });
+
+    function newBtn() {
+        let input = $('.validate').val().trim();
+
+        if (input === '') {
+            return
+        }
+
+        let div = $('<div>')
+            .addClass('container-fluid poi-div')
+        let anchor = $('<a>')
+            .addClass('waves-effect waves-light grey lighten-4 grey-text text-darken-1 btn-large poi-anchor')
+        let close = $('<i>')
+            .addClass('material-icons close right')
+            .text('close')
+        let star = $('<i>')
+            .addClass('material-icons left deep-orange-text text-lighten-1 fav-star')
+            .text('star')
+        let place = $('<i>')
+            .addClass('material-icons left place-marker cyan-text text-lighten-1')
+            .text('place')
+        let p = $('<p>')
+            .addClass('left')
+            .text(input)
+
+        anchor.append(close).append(star).append(place).append(p);
+
+        div.append(anchor);
+
+        $('.poi-collection').append(div);
+
+        database.ref('users/' + emailKey + '/favoritePlaces/').push(input);
+
+        currentFavorites.push(input);
+
+       $('.validate').val('');
+    }
+
+    function loadPlaces() { //here
+
+        let arr = [];
+
+        for (var i = 0; i < arr.length; i++) {
+
+            let div = $('<div>')
+                .addClass('container-fluid poi-div')
+            let anchor = $('<a>')
+                .addClass('waves-effect waves-light grey lighten-4 grey-text text-darken-1 btn-large poi-anchor')
+            let close = $('<i>')
+                .addClass('material-icons close right')
+                .text('close')
+            let star = $('<i>')
+                .addClass('material-icons left grey-text text-darken-1 fav-star')
+                .text('star_border')
+            let place = $('<i>')
+                .addClass('material-icons left place-marker cyan-text text-lighten-1')
+                .text('place')
+            let p = $('<p>')
+                .addClass('left')
+                .text(currentFavorites[i])
+
+            anchor.append(close).append(star).append(place).append(p)
+
+            div.append(anchor)
+
+            $('.poi-collection').append(div)
+
+        }
+
+    }
+
+    $('.add-form').submit(function( event ) {
+
+        event.preventDefault();
+
+        newBtn();
+      });
+
+    $('.add-btn').click(function (event) {
+
+        event.preventDefault();
+
+        newBtn();
+    })
+
     //Sign out of current login
     $('.signout').click(function () {
 
@@ -118,9 +245,9 @@
             $('.profile-tab').removeClass('disabled')
             $('.auth-tab a').removeClass('active').text('Sign Out')
 
-            userSetup(user)
+            userSetup(user);
 
-            // console.log(currentFavorites)
+            favBtns();
 
             emailKey = user.email.substr(0, user.email.indexOf('@'));
 
@@ -145,7 +272,7 @@
         }
     }); //listen for state change
 
-    $('.fav-star').click(function () { //in click handler .off() bound
+    $(document).on('click', '.fav-star', function () {
 
         let text = ($(this).parent().find('p').text());
 
@@ -187,44 +314,49 @@
 
             currentFavorites.splice(currentFavorites.indexOf(text), 1);
 
-                database.ref('users/' + emailKey + '/favoritePlaces/').off("value")
-                database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) { //here
-                    // console.log(snap.val());
-                    snap.forEach(function (data) {
-                        // console.log(data.key);
+            database.ref('users/' + emailKey + '/favoritePlaces/').off("value")
+            database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) {
 
-                        database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).off("value")
-                        database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
+                snap.forEach(function (data) {
 
-                            if (text === (snap.val())) {
+                    database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).off("value")
+                    database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
 
-                                database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).remove();
+                        if (text === (snap.val())) {
 
-                            } else {
-                            }
-                        });
+                            database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).remove();
+
+                        } else {}
                     });
                 });
+            });
         }
     })
 
-    // $(document).on('click', '.fav-star', function () {
+    $(document).on('click', '.close', function () {
 
-    //     //firebase delete
-    //     database.ref("users/" + tupleList[currentIndex].userKey).remove();
+        let text = ($(this).parent().find('p').text());
 
-    //     //local delete
+        emailKey = localUser.email.substr(0, localUser.email.indexOf('@'));
 
-    //     tupleList.splice(currentIndex, 1);
+        currentFavorites.splice(currentFavorites.indexOf(text), 1);
 
-    //     savedNames.splice(currentIndex, 1);
+        database.ref('users/' + emailKey + '/favoritePlaces/').off("value")
+        database.ref('users/' + emailKey + '/favoritePlaces/').on("value", function (snap) {
 
-    //     savedUsers = tupleList;
+            snap.forEach(function (data) {
 
-    //     localStorage.setItem('localUsers', JSON.stringify(savedUsers));
+                database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).off("value")
+                database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).on("value", function (snap) {
 
-    //     $(this).parent().remove();
+                    if (text === (snap.val())) {
 
-    //     location.reload();
-    // });
+                        database.ref('users/' + emailKey + '/favoritePlaces/' + data.key).remove();
+
+                    } else {}
+                });
+            });
+        });
+        $(this).parent().remove();
+    });
 })()

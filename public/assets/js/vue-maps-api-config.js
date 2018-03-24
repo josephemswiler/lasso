@@ -8,6 +8,7 @@ let app = new Vue({
         pos: "",
         currentPlace: "",
         placeDetails: "",
+        showButtons: false,
     },
     methods: {
         initMap() {
@@ -16,7 +17,7 @@ let app = new Vue({
                     lat: 30.307182,
                     lng: -97.755996
                 },
-                zoom: 15
+                zoom: 14,
             });
             this.infoWindow = new google.maps.InfoWindow;
 
@@ -32,6 +33,7 @@ let app = new Vue({
                     let request = {
                         location: app.pos,
                         radius: '1609',
+                        keyword: 'restaurant',
                         query: 'restaurant'
                     };
                     app.service = new google.maps.places.PlacesService(app.map);
@@ -62,6 +64,10 @@ let app = new Vue({
                 position: place.geometry.location,
             });
             google.maps.event.addListener(marker, 'click', function() {
+                // Ugly fix for showing the card content and keeping the click handler working across the different vue elements
+                placeDetailsApp.markerClicked = true;
+                addDestination.showButtons = true;
+                app.showButtons = true;
                 let request = {
                     placeId: place.place_id
                 };
@@ -70,9 +76,9 @@ let app = new Vue({
                         console.log(place, request);
                         app.placeDetails = place;
                         app.currentPlace = request;
-                        app.infoWindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                        'Place ID: ' + place.place_id + '<br>' +
-                        place.formatted_address + '</div>');
+                        app.infoWindow.setContent('<div><strong>' + place.name + '</strong><br>');
+                        // 'Place ID: ' + place.place_id + '<br>' +
+                        // place.formatted_address + '</div>');
                         app.infoWindow.open(app.map, marker);
                         placeDetailsApp.showPlaceDetails(place);
                     }
@@ -107,14 +113,15 @@ let placeDetailsApp = new Vue({
             { id: 4, text: "" }, // website
             { id: 5, text: "" } // photo
         ],
+        markerClicked: false,
     },
     methods: {
         showPlaceDetails(place) {
-            this.placeDetails[0].text = place.name;
-            this.placeDetails[1].text = place.formatted_address;
-            this.placeDetails[2].text = place.formatted_phone_number;
-            this.placeDetails[3].text = place.rating;
-            this.placeDetails[4].text = place.website;
+            this.placeDetails[0].text = "Name: " + place.name;
+            this.placeDetails[1].text = "Address: " + place.formatted_address;
+            this.placeDetails[2].text = "Phone number: " + place.formatted_phone_number;
+            this.placeDetails[3].text = "Rating: " + place.rating;
+            this.placeDetails[4].text = "Website: " + place.website;
             this.placeDetails[5].src = place.photos ? place.photos[0].getUrl({maxWidth : 300, maxHeight : 300}) : null;
         }
     }
