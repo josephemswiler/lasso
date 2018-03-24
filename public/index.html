@@ -51,24 +51,23 @@
                 <div class="card-content">
                     <p class="blue-grey-text">Click the star to save your favorite places!</p>
                 </div>
-
             </div>
             <div class="row add-row">
-                    <form class="col s12 add-form">
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <i class="material-icons left grey-text text-darken-1 prefix">place</i>
-                                <input id="icon_prefix" type="text" class="validate">
-                                <label for="icon_prefix">Place</label>
-                            </div>
-                            <div class="col s6">
-                                <a class="waves-effect waves-light lime accent-1 blue-grey-text btn-large poi-anchor add-btn">
-                                    <p class="center">Add</p>
-                                </a>
-                            </div>
+                <form class="add-form">
+
+                        <div class="input-field col s6">
+                            <i class="material-icons left grey-text text-darken-1 prefix">place</i>
+                            <input id="icon_prefix" type="text" class="validate">
+                            <label for="icon_prefix">Place</label>
                         </div>
-                    </form>
-                </div>
+                        <div class="col s6">
+                            <a class="waves-effect waves-light lime accent-1 blue-grey-text btn-large poi-anchor add-btn">
+                                <p class="center">Add</p>
+                            </a>
+                        </div>
+
+                </form>
+            </div>
             <div class="poi-collection">
             </div>
         </div>
@@ -99,7 +98,6 @@
                             <i class="material-icons left">cloud</i>
                             <span class="left">Sign In</span>
                         </a>
-
                         <a class="waves-effect waves-light blue-grey btn-large signout">
                             <i class="material-icons left">cloud_off</i>
                             <span class="left">Sign Out</span>
@@ -112,12 +110,28 @@
     </div>
     <!-- Auth Section -->
     <!-- Trip Section -->
+
     <div id="trip" class="col s12">
-        <div class="container trip-container">
-            <div class="row">
-                <div class="col s12">
-                    <div id="gmaps-app">
+        <div class="container trip-container center-align">
+            <div id="gmaps-app">
+            </div>
+            <div class="places-wrapper card-display" v-if="showButtons">
+                <div class="card">
+                    <div id="place-details" v-if="markerClicked">
+                        <div class="card-image place-img-wrapper">
+                            <div v-for="item in placeDetails">
+                                <img class="clicked-place-img" v-if="item.src" v-bind:src="item.src" alt="" />
+                            </div>
+                            <div class="card-title blue-grey-text">
+                                <ol>
+                                    <li v-for="item in placeDetails">
+                                        <span v-if="item.text">{{item.text}}</span>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
+
                     <div>
                         <div class="row" v-if="showButtons">
                             <div class="col s12 m7">
@@ -146,9 +160,53 @@
                                     <div id="google-maps-link" v-if="routeChosen">
                                         <a class="waves-effect waves-light lime accent-1 blue-grey-text btn-large open-gmaps" v-bind:href="googleMapsBuiltLink">Open in Google Maps</a>
                                     </div>
+
+                    <div class="inner-btns" id="add-destination" v-if="showButtons">
+                        <a class="waves-effect waves-light blue-grey btn-large add-dest" v-on:click="addDest">Add Destination</a>
+                        <br>
+                        <a class="waves-effect waves-light blue-grey btn-large start-trip" v-on:click="getPOI">Start Trip</a>
+                    </div>
+                    <div class="inner-btns" id="google-maps-link" v-if="routeChosen">
+                        <a class="waves-effect waves-light lime accent-1 blue-grey-text btn-large open-gmaps" v-bind:href="googleMapsBuiltLink">Open in Google Maps</a>
+                    </div>
+                </div>
+                <div class="row dist">
+                    <div class="col">
+                        <div class="card-panel">
+                            <span class="blue-grey-text">
+                                <div id="total-distance">
+                                    <h5>
+                                        {{ totalDistance }}
+                                    </h5>
+
                                 </div>
-                            </div>
+                            </span>
                         </div>
+
+                    </div>
+                </div>
+
+                <!-- <div id="google-maps-link">
+                        <a v-bind:href="googleMapsBuiltLink">Open step-by-step navigation in Google Maps</a>
+                    </div> -->
+                <span class="flow-text"></span>
+            </div>
+
+            <!-- <div id="add-destination">
+                <button v-on:click="addDest">Add Destination</button>
+                <button v-on:click="getPOI">Start Trip</button>
+            </div> -->
+            <!-- <div class="row">
+                <div class="col s12">
+                    <a class="waves-effect waves-light btn-large">
+                        <i class="material-icons left">cloud</i>Button</a>
+                    <a class="waves-effect waves-light btn-large">
+                        <i class="material-icons left">cloud</i>button</a>
+                    <a class="waves-effect waves-light btn-large">
+                        <i class="material-icons left">cloud</i>button</a>
+                </div>
+            </div> -->
+
 
                     <!-- <div id="total-distance">
                         {{ totalDistance }}
@@ -160,31 +218,35 @@
         </div>
         <!-- Trip Section -->
 
-        <!--Import jQuery before materialize.js-->
-        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
-        <!-- Materialize -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
-        <!-- Firebase -->
-        <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+            <!-- Trip Section -->
 
-        <!-- Local Firebase -->
-        <script type="text/javascript" src="assets/js/firebase-config.js"></script>
+            <!--Import jQuery before materialize.js-->
+            <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
-        <!-- Vue JS -->
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
+            <!-- Materialize -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
-        <!-- This needs to be before the Google Maps API call -->
-        <script src="assets/js/calculate-directions.js"></script>
-        <script src="assets/js/vue-maps-api-config.js"></script>
+            <!-- Firebase -->
+            <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
 
-        <!-- Google Maps API call -->
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2IahrwPpyvfygnrvqEa_lP61ri9w3CxY&libraries=places&callback=gmapsCallback"
-            type="text/javascript"></script>
+            <!-- Local Firebase -->
+            <script type="text/javascript" src="assets/js/firebase-config.js"></script>
 
-        <!-- Local JS -->
-        <script type="text/javascript" src="assets/js/index.js"></script>
+            <!-- Vue JS -->
+            <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
+
+            <!-- This needs to be before the Google Maps API call -->
+            <script src="assets/js/calculate-directions.js"></script>
+            <script src="assets/js/vue-maps-api-config.js"></script>
+
+            <!-- Google Maps API call -->
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2IahrwPpyvfygnrvqEa_lP61ri9w3CxY&libraries=places&callback=gmapsCallback"
+                type="text/javascript"></script>
+
+            <!-- Local JS -->
+            <script type="text/javascript" src="assets/js/index.js"></script>
 
 </body>
 

@@ -37,12 +37,54 @@ body {
 	background-color: grey;
 }
 
+#place-details {
+	margin-bottom: 15px;
+}
+
+.card-image {
+	margin-bottom: 15px;
+}
+
+.card-display {
+	margin: 15px;
+
+}
+
+.places-wrapper a {
+	width: 100%;
+}
 
 .open-gmaps, .add-dest, .start-trip {
 	margin-bottom: 15px;
 	width: 80%;
 }
 
+.place-img-wrapper {
+	width: 300px;
+	height: 300px;
+}
+
+.clicked-place-img {
+	width: 300px;
+	height: 300px;
+	object-fit: cover;
+}
+
+
+.this-center {
+	float: none;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.dist {
+	display: none;
+	width: 100%;
+}
+
+.card-panel {
+	width: 100%;
+}
 .card {
 	width: 100%;
 }
@@ -77,8 +119,9 @@ body {
 	max-height: 300px;
 }
 
-.clicked-place-img {
-	width: 300;
+.trip-container {
+	text-align: center;
+	margin: 0 auto;
 }
 
 .profile-container {
@@ -109,7 +152,7 @@ body {
 	margin: 0 auto;
 }
 
-.profile-name {
+.card-title {
 	background: rgba(255, 255, 255, .75)
 }
 
@@ -126,6 +169,17 @@ body {
 	width: 100%;
 }
 
+.inner-btns {
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.places-wrapper {
+	width: 70%;
+	margin-bottom: 15px;
+}
+
 .add-row a {
 	width: 100%;
 }
@@ -136,7 +190,7 @@ body {
 }
 
 .poi-div {
-	margin-bottom: 20px;
+	margin-top: 15px;
 }
 
 .poi-anchor {
@@ -169,6 +223,8 @@ p {
 	text-overflow: ellipsis !important;
 	overflow-wrap: break-word !important;
 }
+
+
 
 @media(max-width: 550px) {
 	.poi-div p {
