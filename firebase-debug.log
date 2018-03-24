@@ -1,0 +1,32 @@
+[debug] [2018-03-24T04:54:44.667Z] ----------------------------------------------------------------------
+[debug] [2018-03-24T04:54:44.669Z] Command:       /usr/local/Cellar/node/9.4.0/bin/node /usr/local/bin/firebase serve
+[debug] [2018-03-24T04:54:44.669Z] CLI Version:   3.17.5
+[debug] [2018-03-24T04:54:44.669Z] Platform:      darwin
+[debug] [2018-03-24T04:54:44.669Z] Node Version:  v9.4.0
+[debug] [2018-03-24T04:54:44.670Z] Time:          Fri Mar 23 2018 23:54:44 GMT-0500 (CDT)
+[debug] [2018-03-24T04:54:44.670Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-03-24T04:54:44.682Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-03-24T04:54:44.682Z] > authorizing via signed-in user
+[debug] [2018-03-24T04:54:44.684Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/project-1-jfe  
+  
+ Fri Mar 23 2018 23:54:44 GMT-0500 (CDT)
+[debug] [2018-03-24T04:54:45.323Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-24T04:54:45.324Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/project-1-jfe/tokens  
+  
+ Fri Mar 23 2018 23:54:45 GMT-0500 (CDT)
+[debug] [2018-03-24T04:54:45.878Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-24T04:54:45.879Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/project-1-jfe  
+  
+ Fri Mar 23 2018 23:54:45 GMT-0500 (CDT)
+[debug] [2018-03-24T04:54:46.139Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/irutner/google_drive/code/git-repos/project-1'...
+[info] 
+[debug] [2018-03-24T04:54:46.142Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/38105637620/clients/_:getWebAppConfig  
+  
+ Fri Mar 23 2018 23:54:46 GMT-0500 (CDT)
+[debug] [2018-03-24T04:54:46.710Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+
